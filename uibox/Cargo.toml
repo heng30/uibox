@@ -1,0 +1,25 @@
+[package]
+name = "uibox"
+version = "1.0.0"
+authors = ["heng30.xyz"]
+edition = "2021"
+build = "build.rs"
+description = "Common UI Box"
+license = "MIT"
+categories= ["UI", "Slint"]
+keywords= ["UI", "Slint", "Rust"]
+
+[dependencies]
+log = "0.4"
+env_logger = "0.9"
+serde = "1.0.139"
+serde_derive = "1.0.139"
+serde_json = "1.0.82"
+clipboard = "0.5"
+anyhow = "1.0"
+slint = { version = "1.1", features = ["log"] }
+
+[build-dependencies]
+slint-build = "1.0.0"
+cmd_lib = "1.3"
+

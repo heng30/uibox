@@ -1,0 +1,20 @@
+import { Theme } from "./theme.slint";
+import { Logic } from "./logic.slint";
+import { Store } from "./store.slint";
+
+export component AppWindow inherits Window {
+    width: Theme.default-width;
+    height: Theme.default-height;
+    background: Theme.base-background;
+    default-font-size: Theme.default-font-size;
+    no-frame: true;
+    title: "chatbox";
+
+    Rectangle {
+        Text {
+            text: "UI BOX";
+        }
+    }
+}
+
+export { Logic, Store }
