@@ -3,6 +3,7 @@ slint::include_modules!();
 #[macro_use]
 extern crate serde_derive;
 
+use chrono::Local;
 use env_logger::fmt::Color as LColor;
 use log::debug;
 use std::env;
