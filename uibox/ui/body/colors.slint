@@ -1,0 +1,63 @@
+import { Theme } from "../theme.slint";
+import { Store } from "../store.slint";
+import { Logic } from "../logic.slint";
+import { IconBtn } from "../base/icon-btn.slint";
+
+export component Colors inherits Rectangle {
+    property<int> column-count: 7;
+    property<length> item-size: 120px;
+    property<length> item-spacing: Theme.spacing;
+
+    callback select-index(int);
+
+    init => {
+        Theme.default-width = (item-size + item-spacing) * column-count - item-spacing + Theme.padding * 2 + Theme.side-width + Theme.padding;
+    }
+
+    flick := Flickable {
+        viewport-height: (item-size + item-spacing) * Math.ceil(Store.colors.length / column-count) - item-spacing + Theme.padding * 2;
+
+        vbox := VerticalLayout {
+            padding: Theme.padding;
+
+            Rectangle {
+                for item[index] in Store.colors : Rectangle {
+                    x: (item-size + item-spacing) * Math.mod(index, column-count);
+                    y: (item-size + item-spacing) * Math.floor(index / column-count);
+                    width: item-size;
+                    height: item-size;
+                    border-radius: Theme.border-radius;
+                    background: touch.pressed ? Theme.hover-color : touch.has-hover ? Theme.hover-color.brighter(10%) : Colors.transparent;
+
+                    VerticalLayout {
+                        alignment: center;
+                        HorizontalLayout {
+                            alignment: center;
+                            Rectangle {
+                                width: item-size * 0.8;
+                                height: self.width;
+                                background: item.value;
+                            }
+                        }
+
+                        HorizontalLayout {
+                            alignment: center;
+                            Text {
+                                text: item.name;
+                                color: Theme.regular-text-color;
+                                font-size: Theme.color-text-font-size;
+                            }
+                        }
+                    }
+
+                    touch := TouchArea {
+                        mouse-cursor: self.has-hover ? pointer : default;
+                        clicked => {
+                            Logic.copy-to-clipboard(item.name);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

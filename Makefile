@@ -20,7 +20,7 @@ run-local:
 	RUST_LOG=error,warn,info,debug ./target/debug/uibox
 
 run-local-release:
-	RUST_LOG=error,warn,info,debug./target/release/uibox
+	RUST_LOG=error,warn,info,debug ./target/release/uibox
 
 clippy:
 	cargo clippy

@@ -1,0 +1,54 @@
+import { Theme } from "../theme.slint";
+import { SelectPanel } from "../store.slint";
+import { IconBtn } from "../base/icon-btn.slint";
+import { CenterLayout } from "../base/center-layout.slint";
+import { Divider } from "../base/divider.slint";
+
+export component Side inherits Rectangle {
+    width: Theme.side-width;
+    background: Theme.darker-fill-color;
+
+    callback selected-icon(SelectPanel);
+
+    HorizontalLayout {
+        VerticalLayout {
+            alignment: start;
+            padding-top: Theme.padding;
+            spacing: Theme.spacing * 2;
+
+            CenterLayout {
+                IconBtn {
+                    width: root.width * 0.8;
+                    icon-width: self.width * 0.8;
+                    icon: @image-url("../images/colorplate.svg");
+                    bg-color: Theme.hover-color.darker(10%);
+                    hover-color: Theme.hover-color.darker(30%);
+
+                    clicked => {
+                        root.selected-icon(SelectPanel.colors);
+                    }
+                }
+            }
+
+            CenterLayout {
+                IconBtn {
+                    width: root.width * 0.8;
+                    icon-width: self.width * 0.8;
+                    icon: @image-url("../images/setting-fill.svg");
+                    bg-color: Theme.hover-color.darker(10%);
+                    hover-color: Theme.hover-color.darker(30%);
+
+                    clicked => {
+                        root.selected-icon(SelectPanel.setting);
+                    }
+                }
+            }
+        }
+
+        Divider {
+            width: 1px;
+            height: root.height;
+            background: Theme.light-border-color;
+        }
+   }
+}

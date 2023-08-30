@@ -9,6 +9,11 @@ use log::debug;
 use std::env;
 use std::io::Write;
 
+mod logic;
+mod util;
+
+use logic::{colors, clipboard, message, util as lutil};
+
 pub type CResult = Result<(), Box<dyn std::error::Error>>;
 
 fn main() -> CResult {
@@ -16,6 +21,10 @@ fn main() -> CResult {
     debug!("{}", "start...");
 
     let ui = AppWindow::new().unwrap();
+    clipboard::init(&ui);
+    message::init(&ui);
+    lutil::init(&ui);
+    colors::init(&ui);
     ui.run().unwrap();
 
     debug!("{}", "exit...");

@@ -1,6 +1,10 @@
 import { Theme } from "./theme.slint";
 import { Logic } from "./logic.slint";
-import { Store } from "./store.slint";
+import { Util } from "./util.slint";
+import { Store, ColorItem } from "./store.slint";
+import { Side } from "./side/panel.slint";
+import { Body } from "./body/panel.slint";
+import { Message } from "./base/message.slint";
 
 export component AppWindow inherits Window {
     width: Theme.default-width;
@@ -8,13 +12,28 @@ export component AppWindow inherits Window {
     background: Theme.base-background;
     default-font-size: Theme.default-font-size;
     no-frame: true;
-    title: "chatbox";
+    title: "uibox";
 
-    Rectangle {
-        Text {
-            text: "UI BOX";
+    hbox := HorizontalLayout {
+        padding: Theme.padding / 2;
+        side := Side {
+            selected-icon(name) => {
+                body.selected-panel = name;
+            }
+        }
+
+        body := Body { }
+    }
+
+    msg := Message {
+        x: root.width / 2 - self.width / 2;
+        y: 50px;
+        text: Store.message.text;
+        type: Store.message.text-type;
+        clicked => {
+            Logic.copy-to-clipboard(self.text);
         }
     }
 }
 
-export { Logic, Store }
+export { Util, Logic, Store, ColorItem }
