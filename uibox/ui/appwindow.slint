@@ -39,13 +39,20 @@ export component AppWindow inherits Window {
 
         HorizontalLayout {
             padding: Theme.padding / 2;
-            side := Side {
-                selected-icon(name) => {
-                    body.selected-panel = name;
-                }
-            }
+                Rectangle {
+                    side := Side {
+                        x: 0px;
+                        z: 1;
+                        selected-icon(name) => {
+                            body.selected-panel = name;
+                        }
+                    }
 
-            body := Body { }
+                    body := Body {
+                        x: Theme.side-width;
+                        z: 0;
+                    }
+                }
         }
 
         modal := Rectangle {

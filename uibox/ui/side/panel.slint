@@ -13,8 +13,9 @@ export component Side inherits Rectangle {
 
     HorizontalLayout {
         VerticalLayout {
-            alignment: start;
+            alignment: space-between;
             padding-top: Theme.padding;
+            padding-bottom: Theme.padding;
             spacing: Theme.spacing * 3;
 
             CenterLayout {
@@ -24,6 +25,8 @@ export component Side inherits Rectangle {
                     icon: @image-url("../images/colorplate.svg");
                     bg-color: Theme.hover-color.darker(10%);
                     hover-color: Theme.hover-color.darker(30%);
+                    tip-pos: "right";
+                    tip-text: Store.translator.tip-colorplate;
 
                     clicked => {
                         root.selected-icon(SelectPanel.colors);
@@ -31,44 +34,54 @@ export component Side inherits Rectangle {
                 }
             }
 
-            CenterLayout {
-                IconBtn {
-                    width: root.width * 0.8;
-                    icon-width: self.width * 0.8;
-                    icon: @image-url("../images/setting-fill.svg");
-                    bg-color: Theme.hover-color.darker(10%);
-                    hover-color: Theme.hover-color.darker(30%);
+            VerticalLayout {
+                spacing: Theme.spacing * 3;
 
-                    clicked => {
-                        root.selected-icon(SelectPanel.setting);
+                CenterLayout {
+                    IconBtn {
+                        width: root.width * 0.8;
+                        icon-width: self.width * 0.8;
+                        icon: @image-url("../images/setting-fill.svg");
+                        bg-color: Theme.hover-color.darker(10%);
+                        hover-color: Theme.hover-color.darker(30%);
+                        tip-pos: "right";
+                        tip-text: Store.translator.tip-setting;
+
+                        clicked => {
+                            root.selected-icon(SelectPanel.setting);
+                        }
                     }
                 }
-            }
 
-            CenterLayout {
-                IconBtn {
-                    width: root.width * 0.8;
-                    icon-width: self.width * 0.8;
-                    icon: @image-url("../images/help.svg");
-                    bg-color: Theme.hover-color.darker(10%);
-                    hover-color: Theme.hover-color.darker(30%);
+                CenterLayout {
+                    IconBtn {
+                        width: root.width * 0.8;
+                        icon-width: self.width * 0.8;
+                        icon: @image-url("../images/help.svg");
+                        bg-color: Theme.hover-color.darker(10%);
+                        hover-color: Theme.hover-color.darker(30%);
+                        tip-pos: "right";
+                        tip-text: Store.translator.tip-help;
 
-                    clicked => {
-                        root.selected-icon(SelectPanel.help);
+                        clicked => {
+                            root.selected-icon(SelectPanel.help);
+                        }
                     }
                 }
-            }
 
-            CenterLayout {
-                IconBtn {
-                    width: root.width * 0.8;
-                    icon-width: self.width * 0.8;
-                    icon: @image-url("../images/about.svg");
-                    bg-color: Theme.hover-color.darker(10%);
-                    hover-color: Theme.hover-color.darker(30%);
+                CenterLayout {
+                    IconBtn {
+                        width: root.width * 0.8;
+                        icon-width: self.width * 0.8;
+                        icon: @image-url("../images/about.svg");
+                        bg-color: Theme.hover-color.darker(10%);
+                        hover-color: Theme.hover-color.darker(30%);
+                        tip-pos: "right";
+                        tip-text: Store.translator.tip-about;
 
-                    clicked => {
-                        Store.about-dialog.show = true;
+                        clicked => {
+                            Store.about-dialog.show = true;
+                        }
                     }
                 }
             }

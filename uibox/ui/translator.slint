@@ -5,6 +5,11 @@ export struct Translation {
     about: string,
 
     tip-copy: string,
+    tip-colorplate: string,
+    tip-setting: string,
+    tip-help: string,
+    tip-about: string,
+
 }
 
 export global Translator {
@@ -13,8 +18,15 @@ export global Translator {
             cancel: is-cn ? "取消" : "Cancel",
             ok: is-cn ? "确定" : "Confirm",
 
+            setting: is-cn ? "设  置" : "Setting",
+            help: is-cn ? "帮  助" : "Help",
             about: is-cn ? "关  于" : "About",
+
             tip-copy: is-cn ? "复制" : "Copy",
+            tip-colorplate: is-cn ? "颜色板" : "Color Plate",
+            tip-setting: is-cn ? "设置" : "Setting",
+            tip-help: is-cn ? "帮助" : "Help",
+            tip-about: is-cn ? "关于" : "About",
         };
     }
 }
