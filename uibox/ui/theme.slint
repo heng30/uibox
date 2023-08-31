@@ -11,8 +11,8 @@ export global Theme  {
 
     out property<length> side-width: 40px;
 
-    in-out property<length> default-width: 1000px;
-    in-out property<length> default-height: 800px;
+    in-out property<length> default-width: 800px;
+    in-out property<length> default-height: default-width * 0.618;
 
     in-out property<string> default-font-family: Store.setting-dialog.ui.font-family;
     in-out property<length> default-font-size: Store.setting-dialog.ui.font-size.to-float() * 1px;
