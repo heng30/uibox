@@ -1,8 +1,20 @@
 export struct Translation {
+    cancel: string,
+    ok: string,
+
+    about: string,
+
+    tip-copy: string,
 }
 
 export global Translator {
     public pure function translation(is-cn: bool) -> Translation {
-        return { };
+        return {
+            cancel: is-cn ? "取消" : "Cancel",
+            ok: is-cn ? "确定" : "Confirm",
+
+            about: is-cn ? "关  于" : "About",
+            tip-copy: is-cn ? "复制" : "Copy",
+        };
     }
 }

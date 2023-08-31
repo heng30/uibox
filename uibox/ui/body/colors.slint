@@ -15,7 +15,7 @@ export component Colors inherits Rectangle {
     }
 
     flick := Flickable {
-        viewport-height: (item-size + item-spacing) * Math.ceil(Store.colors.length / column-count) - item-spacing + Theme.padding * 2;
+        viewport-height: (item-size + item-spacing * 2) * Math.ceil(Store.colors.length / column-count) - item-spacing * 2 + Theme.padding * 2;
 
         vbox := VerticalLayout {
             padding: Theme.padding;
@@ -23,7 +23,7 @@ export component Colors inherits Rectangle {
             Rectangle {
                 for item[index] in Store.colors : Rectangle {
                     x: (item-size + item-spacing) * Math.mod(index, column-count);
-                    y: (item-size + item-spacing) * Math.floor(index / column-count);
+                    y: (item-size + item-spacing * 2) * Math.floor(index / column-count);
                     width: item-size;
                     height: item-size;
                     border-radius: Theme.border-radius;
@@ -34,7 +34,7 @@ export component Colors inherits Rectangle {
                         HorizontalLayout {
                             alignment: center;
                             Rectangle {
-                                width: item-size * 0.8;
+                                width: item-size * 0.7;
                                 height: self.width;
                                 background: item.value;
                             }
@@ -53,7 +53,7 @@ export component Colors inherits Rectangle {
                     touch := TouchArea {
                         mouse-cursor: self.has-hover ? pointer : default;
                         clicked => {
-                            Logic.copy-to-clipboard(item.name);
+                            Logic.copy-to-clipboard(item.hex);
                         }
                     }
                 }

@@ -2,17 +2,23 @@ import { Theme } from "../theme.slint";
 import { Store, SelectPanel } from "../store.slint";
 import { Colors } from "./colors.slint";
 import { Setting } from "./setting.slint";
+import { Help } from "./help.slint";
 
 export component Body inherits VerticalLayout {
     in-out property<SelectPanel> selected-panel: SelectPanel.colors;
 
     colors-panel := Colors {
         visible: selected-panel == SelectPanel.colors;
-        height: selected-panel == SelectPanel.colors ? Theme.default-height : 0px;
+        height: self.visible ? Theme.default-height : 0px;
     }
 
     setting-panel := Setting {
         visible: selected-panel == SelectPanel.setting;
-        height: selected-panel == SelectPanel.setting ? Theme.default-height : 0px;
+        height: self.visible ? Theme.default-height : 0px;
+    }
+
+    help-panel := Help {
+        visible: selected-panel == SelectPanel.help;
+        height: self.visible ? Theme.default-height : 0px;
     }
 }

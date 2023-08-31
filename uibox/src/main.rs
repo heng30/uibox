@@ -11,8 +11,9 @@ use std::io::Write;
 
 mod logic;
 mod util;
+mod version;
 
-use logic::{colors, clipboard, message, util as lutil};
+use logic::{colors, clipboard, message, util as lutil, about};
 
 pub type CResult = Result<(), Box<dyn std::error::Error>>;
 
@@ -25,6 +26,7 @@ fn main() -> CResult {
     message::init(&ui);
     lutil::init(&ui);
     colors::init(&ui);
+    about::init(&ui);
     ui.run().unwrap();
 
     debug!("{}", "exit...");

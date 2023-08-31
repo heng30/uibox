@@ -1,6 +1,6 @@
 use super::colorsdata::ADG3_RGB_JSON;
 use crate::slint_generatedAppWindow::{AppWindow, ColorItem, Store};
-use log::{debug, warn};
+use log::warn;
 use slint::{ComponentHandle, RgbaColor, VecModel};
 use std::rc::Rc;
 
@@ -32,7 +32,6 @@ pub fn init(ui: &AppWindow) {
     let items = VecModel::default();
     match serde_json::from_str::<ColorsConfig>(ADG3_RGB_JSON) {
         Ok(config) => {
-            debug!("{:?}", config.colors[0]);
             for color in config.colors.into_iter() {
                 let name = format!(
                     "#{:02X}{:02X}{:02X}{:02X}",
@@ -43,7 +42,8 @@ pub fn init(ui: &AppWindow) {
                 );
                 let color: RgbaColor<f32> = color.into();
                 items.push(ColorItem {
-                    name: name.into(),
+                    name: name.as_str().into(),
+                    hex: name.into(),
                     value: color.into(),
                 });
             }

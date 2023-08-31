@@ -1,15 +1,23 @@
 import { Translator, Translation} from "./translator.slint";
 
-export enum SelectPanel { colors, setting }
+export enum SelectPanel { colors, setting, help }
 
 export struct ColorItem {
     name: string,
+    hex: string,
     value: color,
 }
 
 export struct MessageItem {
     text: string,
     text-type: string,
+}
+
+export struct AboutDialog {
+    show: bool,
+    title: string,
+    text: string,
+    sponsor: string,
 }
 
 export global Store  {
@@ -29,6 +37,41 @@ export global Store  {
             name: "blue",
             value: rgb(0, 0, 255),
         },
+        {
+            name: "red",
+            value: rgb(255, 0, 0),
+        },
+        {
+
+            name: "green",
+            value: rgb(0, 255, 0),
+        },
+        {
+            name: "blue",
+            value: rgb(0, 0, 255),
+        },
+        {
+            name: "red",
+            value: rgb(255, 0, 0),
+        },
+        {
+
+            name: "green",
+            value: rgb(0, 255, 0),
+        },
+        {
+            name: "blue",
+            value: rgb(0, 0, 255),
+        },
     ];
+
+    in-out property<Translation> translator: Translator.translation(true);
+
+    in-out property<AboutDialog> about-dialog: {
+        show: false,
+        title: "uibox v1.0.0",
+        text: "Based on Slint-UI. Copyright 2022-2030 The Heng30 Company Ltd. All rights reserved. The program is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.",
+        sponsor: "0xf1199999751b1a3A74590adBf95401D19AB30014",
+    };
 }
 

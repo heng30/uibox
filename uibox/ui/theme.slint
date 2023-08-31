@@ -1,4 +1,5 @@
 import { Store } from "./store.slint";
+import "./fonts/SourceHanSerifCN.ttf";
 
 export global Theme  {
     out property<length> padding: 4px;
@@ -13,7 +14,7 @@ export global Theme  {
     in-out property<length> default-height: 800px;
 
     in-out property<length> default-font-size: 20px;
-    in-out property<length> color-text-font-size: 16px;
+    in-out property<length> color-text-font-size: 14px;
     in-out property<length> enlarge-font-size: default-font-size + 1px;
     in-out property<length> body-font-size: default-font-size + 2px;
     in-out property<length> code-font-size: default-font-size + 2px;
@@ -24,6 +25,7 @@ export global Theme  {
     out property<length> icon-size: 24px;
     out property<length> default-label-width: 200px;
     out property<duration> default-animate-duration: 200ms;
+    in-out property<string> default-font-family: "SourceHanSerifCN";
 
     out property<color> brand-color: #409EFF;
     out property<color> success-color: #67C23A;
