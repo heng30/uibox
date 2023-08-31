@@ -1,9 +1,10 @@
 ![screenshot](./screenshot/uibox.png)
 
 #### uibox
-UI工具箱
+不断添加常用UI工具。
 
 #### 功能
+- [x] [显示Atlassian颜色板](https://atlassian.design/resources/color-palette-resources)
 
 #### 参考
 - [Slint Language Documentation](https://slint-ui.com/releases/1.0.0/docs/slint/)

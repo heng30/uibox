@@ -3,6 +3,9 @@ slint::include_modules!();
 #[macro_use]
 extern crate serde_derive;
 
+#[macro_use]
+extern crate lazy_static;
+
 use chrono::Local;
 use env_logger::fmt::Color as LColor;
 use log::debug;
@@ -12,8 +15,9 @@ use std::io::Write;
 mod logic;
 mod util;
 mod version;
+mod config;
 
-use logic::{colors, clipboard, message, util as lutil, about};
+use logic::{colors, clipboard, message, util as lutil, about, setting};
 
 pub type CResult = Result<(), Box<dyn std::error::Error>>;
 
@@ -21,12 +25,15 @@ fn main() -> CResult {
     init_logger();
     debug!("{}", "start...");
 
+    config::init();
+
     let ui = AppWindow::new().unwrap();
     clipboard::init(&ui);
     message::init(&ui);
     lutil::init(&ui);
     colors::init(&ui);
     about::init(&ui);
+    setting::init(&ui);
     ui.run().unwrap();
 
     debug!("{}", "exit...");

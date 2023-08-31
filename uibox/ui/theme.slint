@@ -7,13 +7,15 @@ export global Theme  {
     out property<length> border-radius: 4px;
     out property<length> scroll-width: 12px;
     out property<length> max-image-width: 300px;
+    out property<length> dialog-width: 800px;
 
     out property<length> side-width: 40px;
 
     in-out property<length> default-width: 1000px;
     in-out property<length> default-height: 800px;
 
-    in-out property<length> default-font-size: 20px;
+    in-out property<string> default-font-family: Store.setting-dialog.ui.font-family;
+    in-out property<length> default-font-size: Store.setting-dialog.ui.font-size.to-float() * 1px;
     in-out property<length> color-text-font-size: 14px;
     in-out property<length> enlarge-font-size: default-font-size + 1px;
     in-out property<length> body-font-size: default-font-size + 2px;
@@ -25,7 +27,6 @@ export global Theme  {
     out property<length> icon-size: 24px;
     out property<length> default-label-width: 200px;
     out property<duration> default-animate-duration: 200ms;
-    in-out property<string> default-font-family: "SourceHanSerifCN";
 
     out property<color> brand-color: #409EFF;
     out property<color> success-color: #67C23A;

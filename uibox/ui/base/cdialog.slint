@@ -13,7 +13,7 @@ export component CDialog inherits Rectangle {
     callback ok-clicked();
 
     visible: false;
-    width: 800px;
+    width: Theme.dialog-width;
     height: vbox.preferred-height;
     background: Theme.base-background;
 
@@ -61,7 +61,7 @@ export component CDialog inherits Rectangle {
                 Btn {
                     text: Store.translator.ok;
                     border-width: 0;
-                    icon: @image-url("../images/success.svg");
+                    icon: @image-url("../images/success-fill.svg");
                     clicked => { root.ok-clicked(); }
                 }
             }

@@ -1,6 +1,6 @@
 [package]
 name = "uibox"
-version = "1.0.0"
+version = "0.1.0"
 authors = ["heng30.xyz"]
 edition = "2021"
 build = "build.rs"
@@ -12,6 +12,8 @@ keywords= ["UI", "Slint", "Rust"]
 [dependencies]
 log = "0.4"
 env_logger = "0.9"
+platform-dirs = "0.3"
+lazy_static = "1.4"
 serde = "1.0.139"
 serde_derive = "1.0.139"
 serde_json = "1.0.82"

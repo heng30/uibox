@@ -2,14 +2,20 @@ export struct Translation {
     cancel: string,
     ok: string,
 
+    setting: string,
+    help: string,
     about: string,
+
+    setting-dialog-ui: string,
+    setting-dialog-ui-font-size: string,
+    setting-dialog-ui-font-family: string,
+    setting-dialog-ui-language: string,
 
     tip-copy: string,
     tip-colorplate: string,
     tip-setting: string,
     tip-help: string,
     tip-about: string,
-
 }
 
 export global Translator {
@@ -22,8 +28,13 @@ export global Translator {
             help: is-cn ? "帮  助" : "Help",
             about: is-cn ? "关  于" : "About",
 
+            setting-dialog-ui: is-cn ? "界面" : "UI",
+            setting-dialog-ui-font-size: is-cn ? "字体大小:" : "Font Size:",
+            setting-dialog-ui-font-family: is-cn ? "字体样式:" : "Font Family:",
+            setting-dialog-ui-language: is-cn ? "选择语言:" : "Language:",
+
             tip-copy: is-cn ? "复制" : "Copy",
-            tip-colorplate: is-cn ? "颜色板" : "Color Plate",
+            tip-colorplate: is-cn ? "颜色板" : "Color Palette",
             tip-setting: is-cn ? "设置" : "Setting",
             tip-help: is-cn ? "帮助" : "Help",
             tip-about: is-cn ? "关于" : "About",

@@ -6,6 +6,8 @@ import { Side } from "./side/panel.slint";
 import { Body } from "./body/panel.slint";
 import { Message } from "./base/message.slint";
 import { About } from "./dialog/about.slint";
+import { Help } from "./dialog/help.slint";
+import { Setting } from "./dialog/setting/dialog.slint";
 
 export component AppWindow inherits Window {
     width: Theme.default-width;
@@ -59,16 +61,22 @@ export component AppWindow inherits Window {
             function hide() {
                 if (about-dialog.visible) {
                     Store.about-dialog.show = false;
+                } else if (help-dialog.visible) {
+                    Store.help-dialog.show = false;
+                } else if (setting-dialog.visible) {
+                    Store.setting-dialog.show = false;
                 }
             }
 
-            if about-dialog.visible : Rectangle {
+            if about-dialog.visible || help-dialog.visible || setting-dialog.visible: Rectangle {
                 width: 100%; height: 100%; opacity: 0.3;
                 background: Theme.basic-black-color;
                 TouchArea { }
             }
 
             about-dialog := About { }
+            help-dialog :=  Help { }
+            setting-dialog :=  Setting { }
         }
 
         Message {

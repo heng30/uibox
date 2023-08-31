@@ -48,7 +48,7 @@ export component Side inherits Rectangle {
                         tip-text: Store.translator.tip-setting;
 
                         clicked => {
-                            root.selected-icon(SelectPanel.setting);
+                            Store.setting-dialog.show = true;
                         }
                     }
                 }
@@ -64,7 +64,7 @@ export component Side inherits Rectangle {
                         tip-text: Store.translator.tip-help;
 
                         clicked => {
-                            root.selected-icon(SelectPanel.help);
+                            Store.help-dialog.show = true;
                         }
                     }
                 }

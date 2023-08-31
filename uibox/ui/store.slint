@@ -1,6 +1,6 @@
 import { Translator, Translation} from "./translator.slint";
 
-export enum SelectPanel { colors, setting, help }
+export enum SelectPanel { colors }
 
 export struct ColorItem {
     name: string,
@@ -18,6 +18,19 @@ export struct AboutDialog {
     title: string,
     text: string,
     sponsor: string,
+}
+
+export struct SettingUI {
+    font-size: string,
+    font-family: string,
+    win-width: string,
+    win-height: string,
+    language: string,
+}
+
+export struct SettingDialogConfig {
+    show: bool,
+    ui: SettingUI,
 }
 
 export global Store  {
@@ -65,13 +78,32 @@ export global Store  {
         },
     ];
 
-    in-out property<Translation> translator: Translator.translation(true);
+    in-out property<SettingDialogConfig> setting-dialog: {
+        show: false,
+        ui: {
+            font-size: "20",
+            font-family: "SourceHanSerifCN",
+            language: "cn",
+        }
+    };
+
+    in-out property<Translation> translator: Translator.translation(setting-dialog.ui.language == "cn");
 
     in-out property<AboutDialog> about-dialog: {
         show: false,
         title: "uibox v1.0.0",
         text: "Based on Slint-UI. Copyright 2022-2030 The Heng30 Company Ltd. All rights reserved. The program is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.",
         sponsor: "0xf1199999751b1a3A74590adBf95401D19AB30014",
+    };
+
+    in-out property<{show: bool, text-cn: string, text-en: string}> help-dialog: {
+        show: false,
+        text-cn:
+            "调色板:\n"
+            + "  1. 颜色格式：RGBA。\n",
+        text-en:
+            "Color Palette:\n"
+            + "  1. Color Format: RGBA.\n",
     };
 }
 

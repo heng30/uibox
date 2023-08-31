@@ -1,5 +1,10 @@
+import { SettingDialogConfig } from "./store.slint";
+
 export global Logic {
     callback copy-to-clipboard(string);
     callback show-message(string, string);
+
+    callback setting-cancel();
+    callback setting-ok(SettingDialogConfig);
 }
 
