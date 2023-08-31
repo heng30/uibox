@@ -16,6 +16,8 @@ export struct Translation {
     tip-setting: string,
     tip-help: string,
     tip-about: string,
+    tip-picture: string,
+    tip-font: string,
 }
 
 export global Translator {
@@ -38,6 +40,8 @@ export global Translator {
             tip-setting: is-cn ? "设置" : "Setting",
             tip-help: is-cn ? "帮助" : "Help",
             tip-about: is-cn ? "关于" : "About",
+            tip-picture: is-cn ? "图片" : "Picture",
+            tip-font: is-cn ? "字体" : "Font",
         };
     }
 }
