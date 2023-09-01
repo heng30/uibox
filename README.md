@@ -4,6 +4,7 @@
 
 #### 功能
 - [x] [显示Atlassian颜色板](https://atlassian.design/resources/color-palette-resources)
+- [x] 支持查看系统字体
 
 #### 参考
 - [Slint Language Documentation](https://slint-ui.com/releases/1.0.0/docs/slint/)

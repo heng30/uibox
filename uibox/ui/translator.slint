@@ -14,6 +14,8 @@ export struct Translation {
     no-data: string,
     search-placeholder: string,
 
+    system-default-font: string,
+
     tip-copy: string,
     tip-colorplate: string,
     tip-setting: string,
@@ -39,8 +41,9 @@ export global Translator {
             setting-dialog-ui-language: is-cn ? "选择语言:" : "Language:",
 
             no-data: is-cn ? "没有数据" : "No Data",
-            search-placeholder: is-cn ? "请输入关键字" : "Please Input Keywords",
+            search-placeholder: is-cn ? "请输入关键字" : "Input Keywords",
 
+            system-default-font: is-cn ? "系统默认字体" : "System Default Font",
             tip-copy: is-cn ? "复制" : "Copy",
             tip-colorplate: is-cn ? "颜色板" : "Color Palette",
             tip-setting: is-cn ? "设置" : "Setting",

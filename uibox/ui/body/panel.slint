@@ -5,8 +5,8 @@ import { Font } from "./font/panel.slint";
 import { Picture } from "./picture.slint";
 
 export component Body inherits VerticalLayout {
-    // in-out property<SelectPanel> selected-panel: SelectPanel.colors;
-    in-out property<SelectPanel> selected-panel: SelectPanel.font;
+    in-out property<SelectPanel> selected-panel: SelectPanel.colors;
+    // in-out property<SelectPanel> selected-panel: SelectPanel.font;
     Colors {
         visible: selected-panel == SelectPanel.colors;
         height: self.visible ? Theme.default-height : 0px;

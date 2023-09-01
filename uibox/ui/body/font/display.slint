@@ -1,0 +1,52 @@
+import { Theme } from "../../theme.slint";
+import { Store } from "../../store.slint";
+import { Logic } from "../../logic.slint";
+import { CenterLayout } from "../../base/center-layout.slint";
+
+export component Display inherits Rectangle {
+    in-out property<string> font-name <=> name-txt.text;
+    in-out property<string> font-family;
+
+    public function scoll-to-top() {
+        flick.viewport-y = 0;
+    }
+
+    flick := Flickable {
+        VerticalLayout {
+            alignment: start;
+            spacing: Theme.spacing * 10;
+            padding: Theme.padding * 4;
+
+            name-txt := TextInput {
+                read-only: true;
+                horizontal-alignment: center;
+            }
+
+            VerticalLayout {
+                spacing: Theme.spacing * 30;
+                en-text := TextInput {
+                    wrap: word-wrap;
+                    single-line: false;
+                    font-size: Theme.default-font-size + 6px;
+                    font-family: root.font-family;
+
+                    text: "Give me the strength lightly to bear my joys and sorrows. Give me the strength to make my love fruitful in service.";
+                }
+
+                cn-text := TextInput {
+                    wrap: word-wrap;
+                    single-line: false;
+                    horizontal-alignment: center;
+                    font-size: Theme.default-font-size + 6px;
+                    font-family: root.font-family;
+
+                    text:
+                    "静夜思\n"
+                    + "李白〔唐代〕\n"
+                    + "床前明月光，疑是地上霜。\n"
+                    + "举头望明月，低头思故乡。\n";
+                }
+            }
+        }
+    }
+}

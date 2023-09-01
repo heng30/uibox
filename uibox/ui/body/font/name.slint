@@ -8,11 +8,16 @@ import { NoDataImg } from "../../base/no-data.slint";
 export component Name inherits Rectangle {
     in-out property search-text <=> search-lineedit.text;
 
+    out property<string> font-name: Theme.default-font-family;
+    out property<string> font-family;
+
     private property<length> item-height: 45px;
     forward-focus: search-lineedit;
 
     width: Theme.left-panel-width;
     background: Theme.light-fill-color;
+
+    callback selected(string);
 
     animate width {
         duration: Theme.default-animate-duration;
@@ -33,6 +38,12 @@ export component Name inherits Rectangle {
                 accepted => {
                     search-btn.clicked();
                 }
+
+                edited => {
+                    if (search-lineedit.text == "") {
+                        search-btn.clicked();
+                    }
+                }
             }
 
             search-btn := IconBtn {
@@ -45,6 +56,7 @@ export component Name inherits Rectangle {
                 icon: @image-url("../../images/search.svg");
                 clicked => {
                     Logic.search-font(search-lineedit.text);
+                    flick.viewport-y = 0;
                 }
             }
         }
@@ -58,7 +70,11 @@ export component Name inherits Rectangle {
 
                 touch := TouchArea {
                     mouse-cursor: self.has-hover ? pointer : default;
-                    clicked => { }
+                    clicked => {
+                        root.font-name = data.postscript-name;
+                        root.font-family = data.family;
+                        root.selected(data.postscript-name);
+                    }
                 }
 
                 HorizontalLayout {

@@ -37,8 +37,8 @@ export struct FontItem {
     postscript-name: string,
     name: string,
     family: string,
-    style: [string],
-    weight: int,
+    styles: [string],
+    weight: float,
     stretch: float,
 }
 
@@ -61,13 +61,15 @@ export global Store  {
         },
     ];
 
+
+    in-out property<[FontItem]> fonts-cache: [];
     in-out property<[FontItem]> fonts: [
         {
             postscript-name: "monospace",
             name: "adobel monospace",
             family: "adobel",
-            style: ["Normal", "Italic"],
-            weight: 400,
+            styles: ["Normal", "Italic"],
+            weight: 400.0,
             stretch: 0.8,
         }
     ];
