@@ -66,7 +66,7 @@ export component Name inherits Rectangle {
             for data[index] in Store.fonts : Rectangle {
                 y: index * item-height;
                 height: root.item-height;
-                background: touch.pressed ? root.background.darker(15%) : touch.has-hover ? root.background.darker(5%) : Colors.transparent;
+                background: root.font-name == data.postscript-name || touch.pressed ? root.background.darker(15%) : touch.has-hover ? root.background.darker(5%) : Colors.transparent;
 
                 touch := TouchArea {
                     mouse-cursor: self.has-hover ? pointer : default;

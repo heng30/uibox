@@ -24,18 +24,16 @@ export component Display inherits Rectangle {
 
             VerticalLayout {
                 spacing: Theme.spacing * 30;
-                en-text := TextInput {
+                en-text := Text {
                     wrap: word-wrap;
-                    single-line: false;
                     font-size: Theme.default-font-size + 6px;
                     font-family: root.font-family;
 
                     text: "Give me the strength lightly to bear my joys and sorrows. Give me the strength to make my love fruitful in service.";
                 }
 
-                cn-text := TextInput {
+                cn-text := Text {
                     wrap: word-wrap;
-                    single-line: false;
                     horizontal-alignment: center;
                     font-size: Theme.default-font-size + 6px;
                     font-family: root.font-family;
