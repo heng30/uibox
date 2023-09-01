@@ -1,0 +1,80 @@
+import { LineEdit } from "std-widgets.slint";
+import { Theme } from "../../theme.slint";
+import { Store } from "../../store.slint";
+import { Logic } from "../../logic.slint";
+import { IconBtn } from "../../base/icon-btn.slint";
+import { NoDataImg } from "../../base/no-data.slint";
+
+export component Name inherits Rectangle {
+    in-out property search-text <=> search-lineedit.text;
+
+    private property<length> item-height: 45px;
+    forward-focus: search-lineedit;
+
+    width: Theme.left-panel-width;
+    background: Theme.light-fill-color;
+
+    animate width {
+        duration: Theme.default-animate-duration;
+        easing: ease-in-out;
+    }
+
+    NoDataImg {
+        visible: Store.fonts.length <= 0;
+        img-width: root.width * 0.6;
+        text: Store.translator.no-data;
+    }
+
+    VerticalLayout {
+        HorizontalLayout {
+            search-lineedit := LineEdit {
+                width: root.width - search-btn.width;
+                placeholder-text: Store.translator.search-placeholder;
+                accepted => {
+                    search-btn.clicked();
+                }
+            }
+
+            search-btn := IconBtn {
+                height: Theme.header-height;
+                width: Theme.header-height * 1.33;
+                border-radius: 0;
+                bg-color: Theme.info-color;
+                hover-color: Theme.info-color.darker(20%);
+                icon-width: Theme.icon-size;
+                icon: @image-url("../../images/search.svg");
+                clicked => {
+                    Logic.search-font(search-lineedit.text);
+                }
+            }
+        }
+
+        flick := Flickable {
+            viewport-height: Store.fonts.length * root.item-height;
+            for data[index] in Store.fonts : Rectangle {
+                y: index * item-height;
+                height: root.item-height;
+                background: touch.pressed ? root.background.darker(15%) : touch.has-hover ? root.background.darker(5%) : Colors.transparent;
+
+                touch := TouchArea {
+                    mouse-cursor: self.has-hover ? pointer : default;
+                    clicked => { }
+                }
+
+                HorizontalLayout {
+                    padding-left: Theme.padding * 2;
+                    padding-right: Theme.padding * 2;
+                    alignment: space-between;
+
+                    Text {
+                        width: root.width;
+                        color: Theme.secondary-text-color;
+                        text: data.postscript-name;
+                        overflow: elide;
+                        vertical-alignment: center;
+                    }
+                }
+            }
+        }
+    }
+}

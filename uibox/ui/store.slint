@@ -33,6 +33,15 @@ export struct SettingDialogConfig {
     ui: SettingUI,
 }
 
+export struct FontItem {
+    postscript-name: string,
+    name: string,
+    family: string,
+    style: [string],
+    weight: int,
+    stretch: float,
+}
+
 export global Store  {
     in-out property<MessageItem> message;
 
@@ -50,32 +59,17 @@ export global Store  {
             name: "blue",
             value: rgb(0, 0, 255),
         },
-        {
-            name: "red",
-            value: rgb(255, 0, 0),
-        },
-        {
+    ];
 
-            name: "green",
-            value: rgb(0, 255, 0),
-        },
+    in-out property<[FontItem]> fonts: [
         {
-            name: "blue",
-            value: rgb(0, 0, 255),
-        },
-        {
-            name: "red",
-            value: rgb(255, 0, 0),
-        },
-        {
-
-            name: "green",
-            value: rgb(0, 255, 0),
-        },
-        {
-            name: "blue",
-            value: rgb(0, 0, 255),
-        },
+            postscript-name: "monospace",
+            name: "adobel monospace",
+            family: "adobel",
+            style: ["Normal", "Italic"],
+            weight: 400,
+            stretch: 0.8,
+        }
     ];
 
     in-out property<SettingDialogConfig> setting-dialog: {

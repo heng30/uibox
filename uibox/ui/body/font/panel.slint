@@ -1,0 +1,17 @@
+import { Theme } from "../../theme.slint";
+import { Store } from "../../store.slint";
+import { Logic } from "../../logic.slint";
+import { Name } from "./name.slint";
+
+export component Font inherits Rectangle {
+    HorizontalLayout {
+        spacing: Theme.spacing;
+        Rectangle {
+            Text {
+                text: "字体还没有实现";
+            }
+        }
+
+        Name {}
+    }
+}

@@ -1,7 +1,7 @@
 import { Theme } from "./theme.slint";
 import { Logic } from "./logic.slint";
 import { Util } from "./util.slint";
-import { Store, ColorItem } from "./store.slint";
+import { Store, ColorItem, FontItem } from "./store.slint";
 import { Side } from "./side/panel.slint";
 import { Body } from "./body/panel.slint";
 import { Message } from "./base/message.slint";
@@ -11,7 +11,7 @@ import { Setting } from "./dialog/setting/dialog.slint";
 
 export component AppWindow inherits Window {
     width: Theme.default-width;
-    height: Theme.default-height;
+    height: Theme.default-height + Theme.padding;
     background: Theme.base-background;
     default-font-size: Theme.default-font-size;
     default-font-family: Theme.default-font-family;
@@ -41,20 +41,21 @@ export component AppWindow inherits Window {
 
         HorizontalLayout {
             padding: Theme.padding / 2;
-                Rectangle {
-                    side := Side {
-                        x: 0px;
-                        z: 1;
-                        selected-icon(name) => {
-                            body.selected-panel = name;
-                        }
-                    }
-
-                    body := Body {
-                        x: Theme.side-width;
-                        z: 0;
+            Rectangle {
+                side := Side {
+                    x: 0px;
+                    z: 1;
+                    selected-icon(name) => {
+                        body.selected-panel = name;
                     }
                 }
+
+                body := Body {
+                    x: Theme.side-width;
+                    z: 0;
+                    width: Theme.body-width;
+                }
+            }
         }
 
         modal := Rectangle {
@@ -88,7 +89,7 @@ export component AppWindow inherits Window {
                 Logic.copy-to-clipboard(self.text);
             }
         }
-        }
+    }
 }
 
-export { Util, Logic, Store, ColorItem }
+export { Util, Logic, Store, ColorItem, FontItem }
