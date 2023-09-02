@@ -1,24 +1,29 @@
 import { Theme } from "../theme.slint";
 import { Store, SelectPanel } from "../store.slint";
-import { Colors } from "./colors.slint";
-import { Font } from "./font/panel.slint";
-import { Picture } from "./picture.slint";
+import { ColorPalette } from "./colorpalette.slint";
+import { ColorPicker } from "./colorpicker.slint";
+import { ColorMaker } from "./colormaker.slint";
+import { SystemFont } from "./systemfont/panel.slint";
 
 export component Body inherits VerticalLayout {
-    in-out property<SelectPanel> selected-panel: SelectPanel.colors;
-    // in-out property<SelectPanel> selected-panel: SelectPanel.font;
-    Colors {
-        visible: selected-panel == SelectPanel.colors;
+    in-out property<SelectPanel> selected-panel: SelectPanel.colorpalette;
+    ColorPalette {
+        visible: selected-panel == SelectPanel.colorpalette;
         height: self.visible ? Theme.default-height : 0px;
     }
 
-    Font {
-        visible: selected-panel == SelectPanel.font;
+    ColorMaker {
+        visible: selected-panel == SelectPanel.colormaker;
         height: self.visible ? Theme.default-height : 0px;
     }
 
-    Picture {
-        visible: selected-panel == SelectPanel.picture;
+    ColorPicker {
+        visible: selected-panel == SelectPanel.colorpicker;
+        height: self.visible ? Theme.default-height : 0px;
+    }
+
+    SystemFont {
+        visible: selected-panel == SelectPanel.systemfont;
         height: self.visible ? Theme.default-height : 0px;
     }
 }

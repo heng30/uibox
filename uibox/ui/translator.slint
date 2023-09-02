@@ -17,12 +17,13 @@ export struct Translation {
     system-default-font: string,
 
     tip-copy: string,
-    tip-colorplate: string,
+    tip-colorpalette: string,
+    tip-colormaker: string,
+    tip-colorpicker: string,
+    tip-systemfont: string,
     tip-setting: string,
     tip-help: string,
     tip-about: string,
-    tip-picture: string,
-    tip-font: string,
 }
 
 export global Translator {
@@ -45,12 +46,13 @@ export global Translator {
 
             system-default-font: is-cn ? "系统默认字体" : "System Default Font",
             tip-copy: is-cn ? "复制" : "Copy",
-            tip-colorplate: is-cn ? "颜色板" : "Color Palette",
+            tip-colorpalette: is-cn ? "颜色板" : "Color Palette",
+            tip-colormaker: is-cn ? "调色板" : "Color Maker",
+            tip-colorpicker: is-cn ? "取色器" : "Color Picker",
+            tip-systemfont: is-cn ? "系统字体" : "System Font",
             tip-setting: is-cn ? "设置" : "Setting",
             tip-help: is-cn ? "帮助" : "Help",
             tip-about: is-cn ? "关于" : "About",
-            tip-picture: is-cn ? "图片" : "Picture",
-            tip-font: is-cn ? "字体" : "Font",
         };
     }
 }

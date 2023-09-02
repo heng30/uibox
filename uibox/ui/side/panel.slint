@@ -30,10 +30,10 @@ export component Side inherits Rectangle {
                         hover-color: Theme.hover-color.darker(30%);
                         colorize: Theme.primary-text-color;
                         tip-pos: "right";
-                        tip-text: Store.translator.tip-colorplate;
+                        tip-text: Store.translator.tip-colorpalette;
 
                         clicked => {
-                            root.selected-icon(SelectPanel.colors);
+                            root.selected-icon(SelectPanel.colorpalette);
                         }
                     }
                 }
@@ -42,15 +42,15 @@ export component Side inherits Rectangle {
                     IconBtn {
                         width: root.width * 0.7;
                         icon-width: self.width * 0.8;
-                        icon: @image-url("../images/font.svg");
+                        icon: @image-url("../images/colormaker.svg");
                         bg-color: Theme.hover-color.darker(10%);
                         hover-color: Theme.hover-color.darker(30%);
                         colorize: Theme.primary-text-color;
                         tip-pos: "right";
-                        tip-text: Store.translator.tip-font;
+                        tip-text: Store.translator.tip-colormaker;
 
                         clicked => {
-                            root.selected-icon(SelectPanel.font);
+                            root.selected-icon(SelectPanel.colormaker);
                         }
                     }
                 }
@@ -64,10 +64,27 @@ export component Side inherits Rectangle {
                         hover-color: Theme.hover-color.darker(30%);
                         colorize: Theme.primary-text-color;
                         tip-pos: "right";
-                        tip-text: Store.translator.tip-picture;
+                        tip-text: Store.translator.tip-colorpicker;
 
                         clicked => {
-                            root.selected-icon(SelectPanel.picture);
+                            root.selected-icon(SelectPanel.colorpicker);
+                        }
+                    }
+                }
+
+                CenterLayout {
+                    IconBtn {
+                        width: root.width * 0.7;
+                        icon-width: self.width * 0.8;
+                        icon: @image-url("../images/font.svg");
+                        bg-color: Theme.hover-color.darker(10%);
+                        hover-color: Theme.hover-color.darker(30%);
+                        colorize: Theme.primary-text-color;
+                        tip-pos: "right";
+                        tip-text: Store.translator.tip-systemfont;
+
+                        clicked => {
+                            root.selected-icon(SelectPanel.systemfont);
                         }
                     }
                 }
