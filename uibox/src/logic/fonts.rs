@@ -54,6 +54,10 @@ fn show_all_fonts(ui: &AppWindow) {
                                 .collect::<Vec<&str>>()
                                 .first()
                                 .unwrap()
+                                .split('_')
+                                .collect::<Vec<&str>>()
+                                .first()
+                                .unwrap()
                                 .to_string();
 
                             match map.get_mut(&pname) {

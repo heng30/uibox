@@ -17,13 +17,25 @@ struct ColorsConfig {
     pub colors: Vec<Color>,
 }
 
-impl Into<RgbaColor<f32>> for Color {
-    fn into(self) -> RgbaColor<f32> {
+// impl Into<RgbaColor<f32>> for Color {
+//     fn into(self) -> RgbaColor<f32> {
+//         RgbaColor {
+//             red: self.red,
+//             green: self.green,
+//             blue: self.blue,
+//             alpha: self.alpha,
+//         }
+//     }
+// }
+//
+//
+impl From<Color> for RgbaColor<f32> {
+    fn from(val: Color) -> Self {
         RgbaColor {
-            red: self.red,
-            green: self.green,
-            blue: self.blue,
-            alpha: self.alpha,
+            red: val.red,
+            green: val.green,
+            blue: val.blue,
+            alpha: val.alpha,
         }
     }
 }
@@ -40,11 +52,13 @@ pub fn init(ui: &AppWindow) {
                     (color.blue * 255.0).round() as u8,
                     (color.alpha * 255.0).round() as u8,
                 );
-                let color: RgbaColor<f32> = color.into();
                 items.push(ColorItem {
                     name: name.as_str().into(),
                     hex: name.into(),
-                    value: color.into(),
+                    value: {
+                        let color: RgbaColor<f32> = color.into();
+                        color.into()
+                    },
                 });
             }
             ui.global::<Store>().set_colors(Rc::new(items).into());

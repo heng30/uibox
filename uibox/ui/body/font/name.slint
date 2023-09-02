@@ -80,10 +80,9 @@ export component Name inherits Rectangle {
                 HorizontalLayout {
                     padding-left: Theme.padding * 2;
                     padding-right: Theme.padding * 2;
-                    alignment: space-between;
 
                     Text {
-                        width: root.width;
+                        width: root.width - Theme.padding * 4;
                         color: Theme.secondary-text-color;
                         text: data.postscript-name;
                         overflow: elide;
