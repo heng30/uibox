@@ -1,4 +1,4 @@
-import { LineEdit } from "std-widgets.slint";
+import { LineEdit, ScrollView } from "std-widgets.slint";
 import { Theme } from "../../theme.slint";
 import { Store } from "../../store.slint";
 import { Logic } from "../../logic.slint";
@@ -61,7 +61,7 @@ export component Name inherits Rectangle {
             }
         }
 
-        flick := Flickable {
+        flick := ScrollView {
             viewport-height: Store.fonts.length * root.item-height;
             for data[index] in Store.fonts : Rectangle {
                 y: index * item-height;
@@ -79,10 +79,8 @@ export component Name inherits Rectangle {
 
                 HorizontalLayout {
                     padding-left: Theme.padding * 2;
-                    padding-right: Theme.padding * 2;
 
                     Text {
-                        width: root.width - Theme.padding * 4;
                         color: Theme.secondary-text-color;
                         text: data.postscript-name;
                         overflow: elide;
