@@ -17,18 +17,6 @@ struct ColorsConfig {
     pub colors: Vec<Color>,
 }
 
-// impl Into<RgbaColor<f32>> for Color {
-//     fn into(self) -> RgbaColor<f32> {
-//         RgbaColor {
-//             red: self.red,
-//             green: self.green,
-//             blue: self.blue,
-//             alpha: self.alpha,
-//         }
-//     }
-// }
-//
-//
 impl From<Color> for RgbaColor<f32> {
     fn from(val: Color) -> Self {
         RgbaColor {

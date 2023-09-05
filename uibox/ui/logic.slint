@@ -1,4 +1,5 @@
 import { SettingDialogConfig } from "./store.slint";
+import { ColorPickerConfig } from "./store.slint";
 
 export global Logic {
     callback copy-to-clipboard(string);
@@ -14,6 +15,6 @@ export global Logic {
         return  @image-url("./images/robot.svg");
     }
 
-    callback image-point-color(float, float) -> color;
+    callback image-point-color(float, float) -> ColorPickerConfig;
 }
 

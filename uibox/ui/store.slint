@@ -42,6 +42,14 @@ export struct FontItem {
     stretch: float,
 }
 
+export struct ColorPickerConfig {
+    red: int,
+    green: int,
+    blue: int,
+    alpha: int,
+    hex: string,
+}
+
 export global Store  {
     in-out property<MessageItem> message;
 

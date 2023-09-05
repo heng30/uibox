@@ -1,6 +1,6 @@
 import { LineEdit } from "std-widgets.slint";
 import { Theme } from "../theme.slint";
-import { Store } from "../store.slint";
+import { Store, ColorPickerConfig } from "../store.slint";
 import { Logic } from "../logic.slint";
 import { Label } from "../base/label.slint";
 import { IconBtn } from "../base/icon-btn.slint";
@@ -10,13 +10,33 @@ export component ColorPicker inherits Rectangle {
     property<float> scale: 1.0;
     property<bool> is-pick: false;
     property<bool> is-no-img: true;
+    property<ColorPickerConfig> color-picker-config;
+
+    function zoom-reset() {
+        root.scale = 1.0;
+        flick.viewport-x = 0;
+        flick.viewport-y = 0;
+    }
+
+    function remove-img() {
+        root.zoom-reset();
+        root.is-pick = false;
+        root.is-no-img = true;
+        root.color-picker-config = {
+            red: 0,
+            green: 0,
+            blue: 0,
+            alpha: 0,
+            hex: "",
+        }
+    }
 
     HorizontalLayout {
         padding: Theme.padding * 2;
         spacing: Theme.spacing * 4;
 
         Rectangle {
-            border-width: 2px;
+            border-width: 1px;
             border-color: Theme.dark-border-color;
             VerticalLayout {
                 padding: Theme.padding;
@@ -24,6 +44,8 @@ export component ColorPicker inherits Rectangle {
                 flick := Flickable {
                     viewport-width: root.is-no-img ? parent.width : Math.max(img.source.width * root.scale * 1px, parent.width);
                     viewport-height: root.is-no-img ? parent.width : Math.max(img.source.height * root.scale * 1px, parent.height);
+
+                    interactive: !root.is-pick;
                     img := Image {
                         visible: !root.is-no-img;
                         width: img.source.width * root.scale * 1px;
@@ -44,6 +66,10 @@ export component ColorPicker inherits Rectangle {
                                 img.source = Logic.load-image();
                                 if (img.source.width > 0) {
                                     root.is-no-img = !root.is-no-img;
+                                }
+                            } else {
+                                if (root.is-pick) {
+                                    root.color-picker-config = Logic.image-point-color(self.mouse-x / 1px, self.mouse-y / 1px);
                                 }
                             }
                         }
@@ -102,9 +128,7 @@ export component ColorPicker inherits Rectangle {
                     icon-width: self.width * 0.7;
 
                     clicked => {
-                        root.scale = 1.0;
-                        flick.viewport-x = 0;
-                        flick.viewport-y = 0;
+                        root.zoom-reset();
                     }
                 }
 
@@ -116,9 +140,7 @@ export component ColorPicker inherits Rectangle {
                     icon-width: self.width * 0.7;
 
                     clicked => {
-                        root.is-no-img = true;
-                        flick.viewport-x = 0;
-                        flick.viewport-y = 0;
+                        root.remove-img();
                     }
                 }
             }
@@ -130,6 +152,8 @@ export component ColorPicker inherits Rectangle {
                 }
                 le-red := LineEdit {
                     read-only: true;
+                    text: color-picker-config.red;
+                    placeholder-text: "0~255";
                 }
             }
             HorizontalLayout {
@@ -139,6 +163,8 @@ export component ColorPicker inherits Rectangle {
                 }
                 le-green := LineEdit {
                     read-only: true;
+                    text: color-picker-config.green;
+                    placeholder-text: "0~255";
                 }
             }
             HorizontalLayout {
@@ -148,6 +174,8 @@ export component ColorPicker inherits Rectangle {
                 }
                 le-blue := LineEdit {
                     read-only: true;
+                    text: color-picker-config.blue;
+                    placeholder-text: "0~255";
                 }
             }
             HorizontalLayout {
@@ -157,15 +185,32 @@ export component ColorPicker inherits Rectangle {
                 }
                 le-alpha := LineEdit {
                     read-only: true;
+                    text: color-picker-config.alpha;
+                    placeholder-text: "0~255";
                 }
             }
             HorizontalLayout {
                 Label {
                     width: 40%;
-                    text: Store.translator.hex-value;
+                    text: Store.translator.hex;
                 }
                 le-hex := LineEdit {
                     read-only: true;
+                    text: color-picker-config.hex;
+                    placeholder-text: "rgba";
+                }
+            }
+
+            HorizontalLayout {
+                alignment: center;
+                padding-top: Theme.padding * 2;
+                Rectangle {
+                    width: Theme.left-panel-width * 0.3;
+                    height: self.width;
+                    border-width: 1px;
+                    border-radius: Theme.border-radius;
+                    border-color: Theme.darker-fill-color;
+                    background: rgba(root.color-picker-config.red, root.color-picker-config.green, root.color-picker-config.blue, root.color-picker-config.alpha / 255);
                 }
             }
         }

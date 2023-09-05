@@ -23,6 +23,8 @@ pub fn tr(text: &str) -> String {
     items.insert("清除缓存失败", "Clean Cache Failed");
     items.insert("清除缓存成功", "Clean Cache Success");
     items.insert("正在重试...", "retrying...");
+    items.insert("图片格式非法！", "Invalid Image Format!");
+    items.insert("打开文件失败！", "Open File Failed!");
 
     if let Some(txt) = items.get(text) {
         return txt.to_string();

@@ -17,7 +17,7 @@ mod util;
 mod version;
 mod config;
 
-use logic::{colors, fonts, clipboard, message, util as lutil, about, setting};
+use logic::{colors, fonts, clipboard, message, util as lutil, about, setting, picker};
 
 pub type CResult = Result<(), Box<dyn std::error::Error>>;
 
@@ -33,6 +33,7 @@ fn main() -> CResult {
     lutil::init(&ui);
     colors::init(&ui);
     fonts::init(&ui);
+    picker::init(&ui);
     about::init(&ui);
     setting::init(&ui);
     ui.run().unwrap();
