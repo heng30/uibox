@@ -68,8 +68,8 @@ export component ColorPicker inherits Rectangle {
                                     root.is-no-img = !root.is-no-img;
                                 }
                             } else {
-                                if (root.is-pick) {
-                                    root.color-picker-config = Logic.image-point-color(self.mouse-x / 1px, self.mouse-y / 1px);
+                                if (root.is-pick && root.scale > 0) {
+                                    root.color-picker-config = Logic.image-point-color((self.mouse-x / root.scale) / 1px, (self.mouse-y / root.scale) / 1px);
                                 }
                             }
                         }
