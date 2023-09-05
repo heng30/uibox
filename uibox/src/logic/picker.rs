@@ -1,6 +1,7 @@
 use crate::slint_generatedAppWindow::{AppWindow, ColorPickerConfig, Logic};
 use crate::util::translator::tr;
-use image::{ColorType, DynamicImage, ImageBuffer, Rgba};
+use image::{ColorType, ImageBuffer, Rgba};
+use native_dialog::FileDialog;
 use slint::{ComponentHandle, Rgba8Pixel, SharedPixelBuffer};
 use std::sync::Mutex;
 
@@ -13,10 +14,27 @@ pub fn init(ui: &AppWindow) {
     ui.global::<Logic>().on_load_image(move || {
         let ui = ui_handle.unwrap();
 
-        let image_path = "/home/blue/tmp/1.png";
-        let img: Result<DynamicImage, _> = image::open(image_path);
+        let path = FileDialog::new()
+            .set_location("~")
+            .add_filter("Image Files", &["png", "PNG"])
+            .show_open_single_file();
 
-        match img {
+        let image_path = match path {
+            Ok(file) => match file {
+                Some(file) => file,
+                _ => return slint::Image::default(),
+            },
+            Err(e) => {
+                ui.global::<Logic>().invoke_show_message(
+                    slint::format!("{}{:?}", tr("打开文件失败！"), e),
+                    "warning".into(),
+                );
+
+                return slint::Image::default();
+            }
+        };
+
+        match image::open(image_path) {
             Err(e) => {
                 ui.global::<Logic>().invoke_show_message(
                     slint::format!("{}{:?}", tr("打开文件失败！"), e),

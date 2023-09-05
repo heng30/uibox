@@ -13,6 +13,7 @@ keywords= ["UI", "Slint", "Rust"]
 log = "0.4"
 env_logger = "0.9"
 platform-dirs = "0.3"
+native-dialog = "0.6"
 lazy_static = "1.4"
 serde = "1.0.139"
 serde_derive = "1.0.139"

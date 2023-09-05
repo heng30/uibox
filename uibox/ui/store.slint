@@ -103,11 +103,19 @@ export global Store  {
     in-out property<{show: bool, text-cn: string, text-en: string}> help-dialog: {
         show: false,
         text-cn:
-            "调色板:\n"
-            + "  1. 颜色格式：RGBA。\n",
+              "调色板:\n"
+            + "  1. 颜色格式：RGBA。\n"
+            + "\n取色器:\n"
+            + "  1. 颜色格式：RGBA。\n"
+            + "  2. 支持图片格式：PNG。\n"
+            + "  3. 需要安装本地文件框：kdialog/zenity。\n",
         text-en:
-            "Color Palette:\n"
-            + "  1. Color Format: RGBA.\n",
+              "Color Palette:\n"
+            + "  1. Color format: RGBA.\n"
+            + "\nColor Picker:\n"
+            + "  1. Color format: RGBA.\n"
+            + "  2. Support image format: PNG.\n"
+            + "  3. Need to install file dialog: kdialog/zenity.\n",
     };
 }
 

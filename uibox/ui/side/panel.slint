@@ -25,6 +25,23 @@ export component Side inherits Rectangle {
                     IconBtn {
                         width: root.width * 0.7;
                         icon-width: self.width * 0.8;
+                        icon: @image-url("../images/picture.svg");
+                        bg-color: Theme.hover-color.darker(10%);
+                        hover-color: Theme.hover-color.darker(30%);
+                        colorize: Theme.primary-text-color;
+                        tip-pos: "right";
+                        tip-text: Store.translator.tip-colorpicker;
+
+                        clicked => {
+                            root.selected-icon(SelectPanel.colorpicker);
+                        }
+                    }
+                }
+
+                CenterLayout {
+                    IconBtn {
+                        width: root.width * 0.7;
+                        icon-width: self.width * 0.8;
                         icon: @image-url("../images/colorplate.svg");
                         bg-color: Theme.hover-color.darker(10%);
                         hover-color: Theme.hover-color.darker(30%);
@@ -51,23 +68,6 @@ export component Side inherits Rectangle {
 
                         clicked => {
                             root.selected-icon(SelectPanel.colormaker);
-                        }
-                    }
-                }
-
-                CenterLayout {
-                    IconBtn {
-                        width: root.width * 0.7;
-                        icon-width: self.width * 0.8;
-                        icon: @image-url("../images/picture.svg");
-                        bg-color: Theme.hover-color.darker(10%);
-                        hover-color: Theme.hover-color.darker(30%);
-                        colorize: Theme.primary-text-color;
-                        tip-pos: "right";
-                        tip-text: Store.translator.tip-colorpicker;
-
-                        clicked => {
-                            root.selected-icon(SelectPanel.colorpicker);
                         }
                     }
                 }
