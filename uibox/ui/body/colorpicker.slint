@@ -1,10 +1,173 @@
+import { LineEdit } from "std-widgets.slint";
 import { Theme } from "../theme.slint";
 import { Store } from "../store.slint";
 import { Logic } from "../logic.slint";
+import { Label } from "../base/label.slint";
+import { IconBtn } from "../base/icon-btn.slint";
+import { NoDataImg } from "../base/no-data.slint";
 
 export component ColorPicker inherits Rectangle {
-    background: black;
-    Text {
-        text: "图片还没有实现";
+    property<float> scale: 1.0;
+    property<bool> is-pick: false;
+    property<bool> is-no-img: true;
+
+    HorizontalLayout {
+        padding: Theme.padding * 2;
+        spacing: Theme.spacing * 4;
+
+        Rectangle {
+            border-width: 2px;
+            border-color: Theme.dark-border-color;
+            VerticalLayout {
+                padding: Theme.padding;
+
+                flick := Flickable {
+                    viewport-width: root.is-no-img ? parent.width : Math.max(img.source.width * root.scale * 1px, parent.width);
+                    viewport-height: root.is-no-img ? parent.width : Math.max(img.source.height * root.scale * 1px, parent.height);
+                    img := Image {
+                        visible: !root.is-no-img;
+                        width: img.source.width * root.scale * 1px;
+                        height: img.source.height * root.scale * 1px;
+                    }
+
+                    NoDataImg {
+                        visible: root.is-no-img;
+                        width: parent.width;
+                        text: Store.translator.tip-load-img;
+                        opacity: 0.8;
+                    }
+
+                    TouchArea {
+                        mouse-cursor: root.is-no-img || root.is-pick ? pointer : grab;
+                        clicked => {
+                            if (root.is-no-img) {
+                                img.source = Logic.load-image();
+                                if (img.source.width > 0) {
+                                    root.is-no-img = !root.is-no-img;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        VerticalLayout {
+            alignment: center;
+            width: Theme.left-panel-width;
+            spacing: Theme.spacing * 4;
+
+            HorizontalLayout {
+                visible: !root.is-no-img;
+                spacing: Theme.spacing * 2;
+                IconBtn {
+                    bg-color: Colors.transparent;
+                    colorize: Theme.basic-black-color;
+                    icon: @image-url("../images/color-picker.svg");
+                    checked: root.is-pick;
+                    tip-text: Store.translator.tip-pick-color;
+
+                    clicked => {
+                        root.is-pick = !root.is-pick;
+                    }
+                }
+
+                IconBtn {
+                    bg-color: Colors.transparent;
+                    colorize: Theme.basic-black-color;
+                    icon: @image-url("../images/zoom-out.svg");
+                    tip-text: Store.translator.tip-zoom-out;
+
+                    clicked => {
+                        root.scale += 0.2;
+                    }
+                }
+
+                IconBtn {
+                    bg-color: Colors.transparent;
+                    colorize: Theme.basic-black-color;
+                    icon: @image-url("../images/zoom-in.svg");
+                    tip-text: Store.translator.tip-zoom-in;
+
+                    clicked => {
+                        root.scale -= 0.2;
+                    }
+                }
+
+                IconBtn {
+                    bg-color: Colors.transparent;
+                    colorize: Theme.basic-black-color;
+                    icon: @image-url("../images/zoom-reset.svg");
+                    tip-text: Store.translator.tip-zoom-recover;
+                    icon-width: self.width * 0.7;
+
+                    clicked => {
+                        root.scale = 1.0;
+                        flick.viewport-x = 0;
+                        flick.viewport-y = 0;
+                    }
+                }
+
+                IconBtn {
+                    bg-color: Colors.transparent;
+                    colorize: Theme.basic-black-color;
+                    icon: @image-url("../images/delete-light.svg");
+                    tip-text: Store.translator.tip-remove-image;
+                    icon-width: self.width * 0.7;
+
+                    clicked => {
+                        root.is-no-img = true;
+                        flick.viewport-x = 0;
+                        flick.viewport-y = 0;
+                    }
+                }
+            }
+
+            HorizontalLayout {
+                Label {
+                    width: 40%;
+                    text: Store.translator.red;
+                }
+                le-red := LineEdit {
+                    read-only: true;
+                }
+            }
+            HorizontalLayout {
+                Label {
+                    width: 40%;
+                    text: Store.translator.green;
+                }
+                le-green := LineEdit {
+                    read-only: true;
+                }
+            }
+            HorizontalLayout {
+                Label {
+                    width: 40%;
+                    text: Store.translator.blue;
+                }
+                le-blue := LineEdit {
+                    read-only: true;
+                }
+            }
+            HorizontalLayout {
+                Label {
+                    width: 40%;
+                    text: Store.translator.alpha;
+                }
+                le-alpha := LineEdit {
+                    read-only: true;
+                }
+            }
+            HorizontalLayout {
+                Label {
+                    width: 40%;
+                    text: Store.translator.hex-value;
+                }
+                le-hex := LineEdit {
+                    read-only: true;
+                }
+            }
+        }
     }
 }

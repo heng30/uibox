@@ -8,5 +8,12 @@ export global Logic {
     callback setting-ok(SettingDialogConfig);
 
     callback search-font(string);
+
+    callback load-image() -> image;
+    load-image() => {
+        return  @image-url("./images/robot.svg");
+    }
+
+    callback image-point-color(float, float) -> color;
 }
 

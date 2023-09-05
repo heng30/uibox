@@ -17,11 +17,12 @@ export component IconBtn inherits Rectangle {
 
     in-out property<color> bg-color: transparent;
     in-out property<color> hover-color: Theme.hover-color;
+    in-out property<bool> checked: false;
 
     width: Theme.icon-size;
     height: self.width;
     border-radius: self.width / 3;
-    background: touch.pressed ? hover-color.darker(20%) : touch.has-hover ? hover-color : bg-color;
+    background: touch.pressed || root.checked ? hover-color.darker(20%) : touch.has-hover ? hover-color : bg-color;
 
     animate background {
         duration: Theme.default-animate-duration;

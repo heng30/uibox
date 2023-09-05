@@ -16,6 +16,12 @@ export struct Translation {
 
     system-default-font: string,
 
+    red: string,
+    green: string,
+    blue: string,
+    alpha: string,
+    hex-value: string,
+
     tip-copy: string,
     tip-colorpalette: string,
     tip-colormaker: string,
@@ -24,6 +30,12 @@ export struct Translation {
     tip-setting: string,
     tip-help: string,
     tip-about: string,
+    tip-pick-color: string,
+    tip-zoom-in: string,
+    tip-zoom-out: string,
+    tip-zoom-recover: string,
+    tip-remove-image: string,
+    tip-load-img: string,
 }
 
 export global Translator {
@@ -45,6 +57,13 @@ export global Translator {
             search-placeholder: is-cn ? "请输入关键字" : "Input Keywords",
 
             system-default-font: is-cn ? "系统默认字体" : "System Default Font",
+
+            red: is-cn ? "红通道:" : "Red:",
+            green: is-cn ? "绿通道:" : "Green:",
+            blue: is-cn ? "蓝通道:" : "Blue:",
+            alpha: is-cn ? "透明度:" : "Alpha:",
+            hex-value: is-cn ? "颜色值:" : "Color:",
+
             tip-copy: is-cn ? "复制" : "Copy",
             tip-colorpalette: is-cn ? "颜色板" : "Color Palette",
             tip-colormaker: is-cn ? "调色板" : "Color Maker",
@@ -53,6 +72,12 @@ export global Translator {
             tip-setting: is-cn ? "设置" : "Setting",
             tip-help: is-cn ? "帮助" : "Help",
             tip-about: is-cn ? "关于" : "About",
+            tip-pick-color: is-cn ? "取色" : "Pick Color",
+            tip-zoom-in: is-cn ? "缩小" : "Zoom In",
+            tip-zoom-out: is-cn ? "放大" : "Zoom Out",
+            tip-zoom-recover: is-cn ? "恢复大小" : "Reset Size",
+            tip-remove-image: is-cn ? "移除图片": "Romove Image",
+            tip-load-img: is-cn ? "点击加载图片" : "Click to Load Image",
         };
     }
 }
