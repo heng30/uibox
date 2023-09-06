@@ -16,5 +16,8 @@ export global Logic {
     }
 
     callback image-point-color(float, float) -> ColorPickerConfig;
+
+    pure callback current-color-band-color(float, float) -> color;
+    pure callback hex-value(int, int, int) -> string;
 }
 

@@ -1,9 +1,138 @@
+import { LineEdit } from "std-widgets.slint";
 import { Theme } from "../theme.slint";
-import { Store } from "../store.slint";
+import { Store, ColorMakerConfig } from "../store.slint";
 import { Logic } from "../logic.slint";
+import { Label } from "../base/label.slint";
 
 export component ColorMaker inherits Rectangle {
-    Text {
-        text: "调色板还没有实现";
+    property<ColorMakerConfig> color-maker-config: {
+        red: 255,
+        green: 255,
+        blue: 255,
+    };
+
+    HorizontalLayout {
+        padding: Theme.padding * 2;
+        spacing: Theme.spacing * 4;
+
+        Rectangle {
+            border-width: 1px;
+            border-color: Theme.dark-border-color;
+            HorizontalLayout {
+                padding: Theme.padding;
+                spacing: Theme.spacing * 2;
+
+                display-color := Rectangle {
+                    background: @linear-gradient(
+                        180deg,
+                        #FFFFFF 0%,
+                        Logic.current-color-band-color(rec-field.height/1px, (rec-img.y + rec-img.height/2)/1px) 50%,
+                        #000000 100%
+                    );
+
+                    TouchArea {
+                        mouse-cursor: pointer;
+                        clicked => { }
+                    }
+                }
+
+                HorizontalLayout {
+                    property<int> band-count: 5;
+
+                    width: 60px;
+                    padding-top: self.width / 4;
+                    padding-bottom: self.width / 4;
+                    rec-field := Rectangle {
+                        width: 50%;
+                        rec-img := Rectangle {
+                            y: (parent.height - self.height)/2;
+                            width: parent.width;
+                            height: self.width;
+
+                            Image {
+                                width: 100%;
+                                source: @image-url("../images/arrows.svg");
+                                rotation-angle: -90deg;
+                                colorize: img-area.pressed ? Theme.primary-text-color : Theme.basic-black-color;
+                            }
+
+                            img-area := TouchArea {
+                                moved => {
+                                    rec-img.y = Math.min(Math.max(-rec-img.height/2, rec-img.y + self.mouse-y - self.pressed-y), color-band.height - rec-img.height / 2);
+                                }
+                            }
+                        }
+                    }
+
+                    color-band := Rectangle {
+                        background: @linear-gradient(180deg, #FF0000 0%, #FFFF00 1/band-count, #00FF00 2/band-count, #00FFFF 3/band-count, #0000FF 4/band-count, #FF00FF 100%);
+                    }
+                }
+            }
+        }
+
+        VerticalLayout {
+            alignment: center;
+            width: Theme.left-panel-width;
+            spacing: Theme.spacing * 4;
+
+            HorizontalLayout {
+                Label {
+                    width: 40%;
+                    text: Store.translator.red;
+                }
+                le-red := LineEdit {
+                    read-only: true;
+                    text: color-maker-config.red;
+                    placeholder-text: "0~255";
+                }
+            }
+            HorizontalLayout {
+                Label {
+                    width: 40%;
+                    text: Store.translator.green;
+                }
+                le-green := LineEdit {
+                    read-only: true;
+                    text: color-maker-config.green;
+                    placeholder-text: "0~255";
+                }
+            }
+            HorizontalLayout {
+                Label {
+                    width: 40%;
+                    text: Store.translator.blue;
+                }
+                le-blue := LineEdit {
+                    read-only: true;
+                    text: color-maker-config.blue;
+                    placeholder-text: "0~255";
+                }
+            }
+            HorizontalLayout {
+                Label {
+                    width: 40%;
+                    text: Store.translator.hex;
+                }
+                le-hex := LineEdit {
+                    read-only: true;
+                    placeholder-text: "rgb";
+                    text: Logic.hex-value(color-maker-config.red, color-maker-config.green, color-maker-config.blue);
+                }
+            }
+
+            HorizontalLayout {
+                alignment: center;
+                padding-top: Theme.padding * 2;
+                Rectangle {
+                    width: Theme.left-panel-width * 0.3;
+                    height: self.width;
+                    border-width: 1px;
+                    border-radius: Theme.border-radius;
+                    border-color: Theme.darker-fill-color;
+                    background: rgb(root.color-maker-config.red, root.color-maker-config.green, root.color-maker-config.blue);
+                }
+            }
+        }
     }
 }

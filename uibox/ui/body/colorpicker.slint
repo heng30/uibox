@@ -185,8 +185,8 @@ export component ColorPicker inherits Rectangle {
                 }
                 le-alpha := LineEdit {
                     read-only: true;
-                    text: color-picker-config.alpha;
-                    placeholder-text: "0~255";
+                    text: Math.round(color-picker-config.alpha * 100 / 255) + "%";
+                    placeholder-text: "0~100%";
                 }
             }
             HorizontalLayout {

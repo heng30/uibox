@@ -7,3 +7,4 @@ pub mod about;
 pub mod setting;
 pub mod fonts;
 pub mod picker;
+pub mod maker;
