@@ -1,0 +1,24 @@
+import { Theme } from "../theme.slint";
+
+export component Ring inherits Rectangle {
+    in-out property inner-color <=> inner.border-color;
+    in-out property inner-width <=> inner.border-width;
+
+    width: 18px;
+    height: self.width;
+    border-radius: self.width / 2;
+    border-width: 3px;
+    border-color: black;
+
+    inner := Rectangle {
+        width: parent.width - parent.border-width * 2;
+        height: self.width;
+        border-radius: self.width / 2;
+        border-width: parent.border-width;
+        border-color: white;
+
+        Rectangle {
+            background: transparent;
+        }
+    }
+}

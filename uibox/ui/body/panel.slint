@@ -6,25 +6,23 @@ import { ColorMaker } from "./colormaker.slint";
 import { SystemFont } from "./systemfont/panel.slint";
 
 export component Body inherits VerticalLayout {
-    // in-out property<SelectPanel> selected-panel: SelectPanel.colorpalette;
-    in-out property<SelectPanel> selected-panel: SelectPanel.colormaker;
     ColorPalette {
-        visible: selected-panel == SelectPanel.colorpalette;
+        visible: Store.selected-panel == SelectPanel.colorpalette;
         height: self.visible ? Theme.default-height : 0px;
     }
 
     ColorMaker {
-        visible: selected-panel == SelectPanel.colormaker;
+        visible: Store.selected-panel == SelectPanel.colormaker;
         height: self.visible ? Theme.default-height : 0px;
     }
 
     ColorPicker {
-        visible: selected-panel == SelectPanel.colorpicker;
+        visible: Store.selected-panel == SelectPanel.colorpicker;
         height: self.visible ? Theme.default-height : 0px;
     }
 
     SystemFont {
-        visible: selected-panel == SelectPanel.systemfont;
+        visible: Store.selected-panel == SelectPanel.systemfont;
         height: self.visible ? Theme.default-height : 0px;
     }
 }

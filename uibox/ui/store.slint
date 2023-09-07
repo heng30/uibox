@@ -58,6 +58,7 @@ export struct ColorMakerConfig {
 
 export global Store  {
     in-out property<MessageItem> message;
+    in-out property<SelectPanel> selected-panel: SelectPanel.colorpicker;
 
     in-out property<[ColorItem]> colors: [
         {

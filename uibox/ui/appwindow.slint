@@ -1,7 +1,7 @@
 import { Theme } from "./theme.slint";
 import { Logic } from "./logic.slint";
 import { Util } from "./util.slint";
-import { Store, ColorItem, FontItem, ColorPickerConfig } from "./store.slint";
+import { Store, ColorItem, FontItem, ColorPickerConfig, ColorMakerConfig } from "./store.slint";
 import { Side } from "./side/panel.slint";
 import { Body } from "./body/panel.slint";
 import { Message } from "./base/message.slint";
@@ -46,7 +46,7 @@ export component AppWindow inherits Window {
                     x: 0px;
                     z: 1;
                     selected-icon(name) => {
-                        body.selected-panel = name;
+                        Store.selected-panel = name;
                     }
                 }
 
@@ -92,4 +92,4 @@ export component AppWindow inherits Window {
     }
 }
 
-export { Util, Logic, Store, ColorItem, FontItem, ColorPickerConfig }
+export { Util, Logic, Store, ColorItem, FontItem, ColorPickerConfig, ColorMakerConfig }

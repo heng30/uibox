@@ -1,5 +1,5 @@
 import { SettingDialogConfig } from "./store.slint";
-import { ColorPickerConfig } from "./store.slint";
+import { ColorPickerConfig, ColorMakerConfig } from "./store.slint";
 
 export global Logic {
     callback copy-to-clipboard(string);
@@ -17,6 +17,7 @@ export global Logic {
 
     callback image-point-color(float, float) -> ColorPickerConfig;
 
+    pure callback current-display-color(float, float, color) -> ColorMakerConfig;
     pure callback current-color-band-color(float, float) -> color;
     pure callback hex-value(int, int, int) -> string;
 }

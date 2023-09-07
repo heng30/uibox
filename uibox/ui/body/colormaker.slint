@@ -3,13 +3,10 @@ import { Theme } from "../theme.slint";
 import { Store, ColorMakerConfig } from "../store.slint";
 import { Logic } from "../logic.slint";
 import { Label } from "../base/label.slint";
+import { Ring } from "../base/ring.slint";
 
 export component ColorMaker inherits Rectangle {
-    property<ColorMakerConfig> color-maker-config: {
-        red: 255,
-        green: 255,
-        blue: 255,
-    };
+    property<ColorMakerConfig> color-maker-config: Logic.current-display-color(display-color.height/1px, (ring.y + ring.height/2)/1px, display-color.current-band-color);
 
     HorizontalLayout {
         padding: Theme.padding * 2;
@@ -22,17 +19,27 @@ export component ColorMaker inherits Rectangle {
                 padding: Theme.padding;
                 spacing: Theme.spacing * 2;
 
-                display-color := Rectangle {
-                    background: @linear-gradient(
-                        180deg,
-                        #FFFFFF 0%,
-                        Logic.current-color-band-color(rec-field.height/1px, (rec-img.y + rec-img.height/2)/1px) 50%,
-                        #000000 100%
-                    );
+                VerticalLayout {
+                    padding: Theme.padding * 2;
 
-                    TouchArea {
-                        mouse-cursor: pointer;
-                        clicked => { }
+                    display-color := Rectangle {
+                        property<color> current-band-color: Logic.current-color-band-color(rec-field.height/1px, (rec-img.y + rec-img.height/2)/1px);
+
+                        background: @linear-gradient(
+                            180deg,
+                            #FFFFFF 0%,
+                            current-band-color 50%,
+                            #000000 100%
+                        );
+
+                        ring := Ring {
+                            TouchArea {
+                                moved => {
+                                    ring.x = Math.min(Math.max(-ring.width/2, ring.x + self.mouse-x - self.pressed-x), display-color.width - ring.width / 2);
+                                    ring.y = Math.min(Math.max(-ring.height/2, ring.y + self.mouse-y - self.pressed-y), display-color.height - ring.height / 2);
+                                }
+                            }
+                        }
                     }
                 }
 
@@ -57,6 +64,7 @@ export component ColorMaker inherits Rectangle {
                             }
 
                             img-area := TouchArea {
+                                mouse-cursor: self.pressed ? grabbing : default;
                                 moved => {
                                     rec-img.y = Math.min(Math.max(-rec-img.height/2, rec-img.y + self.mouse-y - self.pressed-y), color-band.height - rec-img.height / 2);
                                 }
