@@ -3,6 +3,8 @@
 不断添加常用UI工具。
 
 #### 功能
+- [x] 支持获取图片像素颜色
+- [x] 支持调色板
 - [x] [显示Atlassian颜色板](https://atlassian.design/resources/color-palette-resources)
 - [x] 支持查看系统字体
 
