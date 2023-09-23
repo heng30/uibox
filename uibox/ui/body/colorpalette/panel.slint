@@ -1,0 +1,56 @@
+import { Theme } from "../../theme.slint";
+import { Store } from "../../store.slint";
+import { Logic } from "../../logic.slint";
+import { IconBtn } from "../../base/icon-btn.slint";
+import { TabBtn } from "../../base/tab-btn.slint";
+import { Divider } from "../../base/divider.slint";
+import { Colors } from "./colors.slint";
+
+export component ColorPalette inherits Rectangle {
+    property<string> current-checked-item: "adg3";
+
+    VerticalLayout {
+        alignment: start;
+
+        vbox := VerticalLayout {
+            spacing: Theme.spacing;
+            padding: Theme.padding;
+
+            HorizontalLayout {
+                alignment: space-around;
+                height: Theme.default-font-size + Theme.padding * 2;
+
+                TabBtn {
+                    text: "ADG3";
+                    checked: current-checked-item == "adg3";
+                    clicked => {
+                        current-checked-item = "adg3";
+                        Store.colors = Store.colors-adg3;
+                    }
+                }
+
+                TabBtn {
+                    text: "DSP";
+                    checked: current-checked-item == "dsp";
+                    clicked => {
+                        current-checked-item = "dsp";
+                        Store.colors = Store.colors-dsp;
+                    }
+                }
+            }
+
+            HorizontalLayout {
+                alignment: center;
+                Divider {
+                    width: 100%;
+                    background: Theme.dark-border-color;
+                }
+            }
+        }
+
+        Colors {
+            width: 100%;
+            height: root.height - vbox.preferred-height;
+        }
+    }
+}

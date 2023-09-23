@@ -1,17 +1,17 @@
 ![screenshot](./screenshot/uibox.png)
 
-[中文文档](./README.zh-CN.md)
+[English Document](./README.md)
 
-#### Introduction
-Continuously add commonly used UI tools.
+#### 介绍
+不断添加常用UI工具。
 
-#### Features
- [x] Support for obtaining pixel colors from images
-- [x] Support for color palettes
-- [x] [Display Atlassian color palette](https://atlassian.design/resources/color-palette-resources)
-- [x] Support for viewing system fonts
+#### 功能
+- [x] 支持获取图片像素颜色
+- [x] 支持调色板
+- [x] [显示Atlassian颜色板](https://atlassian.design/resources/color-palette-resources)
+- [x] 支持查看系统字体
 
-#### References
+#### 参考
 - [Slint Language Documentation](https://slint-ui.com/releases/1.0.0/docs/slint/)
 - [github/slint-ui](https://github.com/slint-ui/slint)
 - [Viewer for Slint](https://github.com/slint-ui/slint/tree/master/tools/viewer)

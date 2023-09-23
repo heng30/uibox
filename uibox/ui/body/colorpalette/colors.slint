@@ -1,18 +1,12 @@
-import { Theme } from "../theme.slint";
-import { Store } from "../store.slint";
-import { Logic } from "../logic.slint";
-import { IconBtn } from "../base/icon-btn.slint";
+import { Theme } from "../../theme.slint";
+import { Store } from "../../store.slint";
+import { Logic } from "../../logic.slint";
+import { IconBtn } from "../../base/icon-btn.slint";
 
-export component ColorPalette inherits Rectangle {
-    property<int> column-count: 7;
-    property<length> item-size: 120px;
-    property<length> item-spacing: Theme.spacing;
-
-    callback select-index(int);
-
-    init => {
-        Theme.default-width = (item-size + item-spacing) * column-count - item-spacing + Theme.padding * 2 + Theme.side-width + Theme.padding;
-    }
+export component Colors inherits Rectangle {
+    property<int> column-count: Theme.colors-column-count;
+    property<length> item-size: Theme.colors-item-size;
+    property<length> item-spacing: Theme.colors-item-spacing;
 
     flick := Flickable {
         viewport-height: (item-size + item-spacing * 2) * Math.ceil(Store.colors.length / column-count) - item-spacing * 2 + Theme.padding * 2;
