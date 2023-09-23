@@ -6,7 +6,7 @@
 Continuously add commonly used UI tools.
 
 #### Features
- [x] Support for obtaining pixel colors from images
+- [x] Support for obtaining pixel colors from images
 - [x] Support for color palettes
 - [x] [Display Atlassian color palette](https://atlassian.design/resources/color-palette-resources)
 - [x] Support for viewing system fonts
