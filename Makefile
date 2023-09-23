@@ -14,13 +14,13 @@ build-debug:
 	SLINT_STYLE=fluent cargo build
 
 run:
-	SLINT_STYLE=fluent RUST_LOG=error,warn,info,debug cargo run
+	SLINT_STYLE=fluent RUST_LOG=error,warn,info,debug,font_kit=off cargo run
 
 run-local:
-	RUST_LOG=error,warn,info,debug ./target/debug/uibox
+	RUST_LOG=error,warn,info,debug,font_kit=off ./target/debug/uibox
 
 run-local-release:
-	RUST_LOG=error,warn,info,debug ./target/release/uibox
+	RUST_LOG=error,warn,info,debug,font_kit=off ./target/release/uibox
 
 clippy:
 	cargo clippy

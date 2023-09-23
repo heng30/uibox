@@ -1,7 +1,8 @@
 use super::colorsdata::{ADG3_RGB_JSON, DSP_JSON};
 use crate::slint_generatedAppWindow::{AppWindow, ColorItem, Store};
 use log::warn;
-use slint::{ComponentHandle, ModelRc, RgbaColor, VecModel};
+use slint::{ComponentHandle, ModelExt, ModelRc, RgbaColor, VecModel};
+use std::cmp::Ordering;
 
 #[derive(Serialize, Deserialize, Default, Debug, Clone)]
 struct Color {
@@ -79,6 +80,10 @@ pub fn init(ui: &AppWindow) {
                     },
                 });
             }
+
+            let items = items
+                .sort_by(|a, b| -> Ordering { a.name.to_lowercase().cmp(&b.name.to_lowercase()) });
+
             ui.global::<Store>().set_colors_dsp(ModelRc::new(items));
         }
         Err(e) => {

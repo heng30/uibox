@@ -21,7 +21,6 @@ pub static ADG3_RGB_JSON: &str = r#"{
       "blue": 0.7529411764705882,
       "alpha": 1
     },
-    { "red": 1, "green": 1, "blue": 1, "alpha": 1 },
     {
       "red": 0.25098039215686285,
       "green": 0.19607843137254896,
@@ -177,9 +176,6 @@ pub static ADG3_RGB_JSON: &str = r#"{
       "alpha": 1
     },
     { "red": 0.98, "green": 0.984, "blue": 0.988, "alpha": 1 },
-    { "red": 1, "green": 1, "blue": 1, "alpha": 1 },
-    { "red": 1, "green": 1, "blue": 1, "alpha": 1 },
-    { "red": 1, "green": 1, "blue": 1, "alpha": 1 },
     { "red": 0.09, "green": 0.169, "blue": 0.302, "alpha": 1 },
     {
       "red": 0.035294117647058816,
@@ -503,14 +499,6 @@ pub static DSP_JSON: &str = r##"{
     {
       "name": "celery-700",
       "value": "#379947ff"
-    },
-    {
-      "name": "black",
-      "value": "#000000ff"
-    },
-    {
-      "name": "white",
-      "value": "#FFFFFFff"
     },
     {
       "name": "blue-800",
