@@ -17,11 +17,12 @@ mod util;
 mod version;
 mod config;
 
-use logic::{colors, fonts, clipboard, message, util as lutil, about, setting, picker, maker};
+use logic::{colors, fonts, clipboard, message, util as lutil, about, setting, picker, maker, chat, ok_cancel_dialog};
 
 pub type CResult = Result<(), Box<dyn std::error::Error>>;
 
-fn main() -> CResult {
+#[tokio::main]
+async fn main() -> CResult {
     init_logger();
     debug!("{}", "start...");
 
@@ -31,12 +32,14 @@ fn main() -> CResult {
     clipboard::init(&ui);
     message::init(&ui);
     lutil::init(&ui);
+    chat::init(&ui);
     colors::init(&ui);
     fonts::init(&ui);
     picker::init(&ui);
     maker::init(&ui);
     about::init(&ui);
     setting::init(&ui);
+    ok_cancel_dialog::init(&ui);
     ui.run().unwrap();
 
     debug!("{}", "exit...");

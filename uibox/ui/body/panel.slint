@@ -4,8 +4,16 @@ import { ColorPalette } from "./colorpalette/panel.slint";
 import { ColorPicker } from "./colorpicker.slint";
 import { ColorMaker } from "./colormaker.slint";
 import { SystemFont } from "./systemfont/panel.slint";
+import { CreateImg } from "./createimg/panel.slint";
 
 export component Body inherits VerticalLayout {
+    forward-focus: create-img;
+
+    create-img := CreateImg {
+        visible: Store.selected-panel == SelectPanel.createimg;
+        height: self.visible ? Theme.default-height : 0px;
+    }
+
     ColorPalette {
         visible: Store.selected-panel == SelectPanel.colorpalette;
         height: self.visible ? Theme.default-height : 0px;

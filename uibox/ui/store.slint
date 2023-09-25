@@ -1,6 +1,6 @@
 import { Translator, Translation} from "./translator.slint";
 
-export enum SelectPanel { colorpalette, colormaker, colorpicker, systemfont }
+export enum SelectPanel { createimg, colorpalette, colormaker, colorpicker, systemfont }
 
 export struct ColorItem {
     name: string,
@@ -28,9 +28,17 @@ export struct SettingUI {
     language: string,
 }
 
+export struct SettingProxy {
+    openai: bool,
+    azure: bool,
+    url: string,
+    port: string,
+}
+
 export struct SettingDialogConfig {
     show: bool,
     ui: SettingUI,
+    proxy: SettingProxy,
 }
 
 export struct FontItem {
@@ -56,9 +64,41 @@ export struct ColorMakerConfig {
     blue: int,
 }
 
+export struct OkCancelDialogSetting {
+    title-type: string,
+    title-text: string,
+    body-text: string,
+
+    handle-type: string,
+    handle-uuid: string,
+}
+
+export struct ChatItem {
+    uuid: string,
+    utext: string,
+    imgs: [image],
+    imgs-base64: [string],
+}
+
 export global Store  {
+    in-out property<[ChatItem]> chat-datas: [
+        {
+            uuid: "ff",
+            utext: "hello world",
+            imgs: [
+                @image-url("./images/robot.svg"),
+                @image-url("./images/bot.svg"),
+            ],
+            imgs-base64: [
+                "111111",
+                "222222",
+            ]
+        }
+    ];
+
+    in-out property<OkCancelDialogSetting> ok-cancel-dialog-setting;
     in-out property<MessageItem> message;
-    in-out property<SelectPanel> selected-panel: SelectPanel.colorpicker;
+    in-out property<SelectPanel> selected-panel: SelectPanel.createimg;
 
     in-out property<[ColorItem]> colors-adg3: [];
     in-out property<[ColorItem]> colors-dsp: [];

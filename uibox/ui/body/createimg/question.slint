@@ -1,0 +1,38 @@
+import { LineEdit } from "std-widgets.slint";
+import { Theme } from "../../theme.slint";
+import { Store } from "../../store.slint";
+import { Logic } from "../../logic.slint";
+import { IconBtn } from "../../base/icon-btn.slint";
+
+export component Question inherits Rectangle {
+    height: Theme.question-box-height;
+    border-radius: Theme.border-radius;
+    border-color: Theme.darker-border-color;
+    forward-focus: question-box;
+
+    HorizontalLayout {
+        alignment: space-between;
+
+        question-box := LineEdit {
+            width: root.width - send-btn.width - parent.padding * 2;
+            placeholder-text: Store.translator.enter-to-send;
+            accepted => {
+                send-btn.clicked();
+            }
+        }
+
+        send-btn := IconBtn {
+            height: root.height;
+            width: self.height * 1.33;
+            border-radius: 0;
+            bg-color: Theme.darker-fill-color.darker(10%);
+            icon-width: Theme.icon-size;
+            icon: @image-url("../../images/send.svg");
+            colorize: Theme.brand-color.darker(50%);
+            clicked => {
+                Logic.send-question-text(question-box.text);
+                question-box.text = "";
+            }
+        }
+    }
+}

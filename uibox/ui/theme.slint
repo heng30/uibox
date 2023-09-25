@@ -14,6 +14,8 @@ export global Theme  {
     out property<length> left-panel-width: 300px;
     out property<length> body-width: default-width - side-width - padding;
 
+    out property<length> question-box-height: 35px;
+
     out property<int> colors-column-count: 7;
     out property<length> colors-item-size: 120px;
     out property<length> colors-item-spacing: Theme.spacing;
@@ -69,5 +71,7 @@ export global Theme  {
     out property<color> darker-fill-color: dark-fill-color.darker(5%);
     out property<color> light-fill-color: base-fill-color.brighter(5%);
     out property<color> lighter-fill-color: light-fill-color.brighter(10%);
+
+    out property<color> avatar-color: primary-text-color.brighter(50%);
 
 }

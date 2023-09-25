@@ -1,0 +1,74 @@
+import { Theme } from "../../theme.slint";
+import { Store } from "../../store.slint";
+import { IconBtn } from "../../base/icon-btn.slint";
+import { Avatar } from "../../base/avatar.slint";
+import { Logic } from "../../logic.slint";
+
+export component TextItem inherits TextInput {
+    wrap: word-wrap;
+    color: Theme.regular-text-color;
+    font-size: Theme.body-font-size;
+    single-line: false;
+    read-only: true;
+}
+
+export component UItem inherits VerticalLayout{
+    in-out property<string> uuid;
+    in-out property<string> text;
+
+    padding-left: Theme.scroll-width;
+    spacing: Theme.spacing;
+
+    HorizontalLayout {
+        padding-bottom: Theme.padding;
+        alignment: space-between;
+        spacing: Theme.spacing * 4;
+
+        HorizontalLayout {
+            spacing: Theme.spacing * 4;
+
+            Avatar {
+                icon-source: @image-url("../../images/skull.svg");
+            }
+
+            timestamp-txt := Text {
+                color: Theme.regular-text-color;
+                font-size: Theme.icon-size * 0.7;
+                vertical-alignment: center;
+            }
+        }
+
+        HorizontalLayout {
+            spacing: Theme.spacing * 2;
+
+            VerticalLayout {
+                alignment: center;
+                IconBtn {
+                    icon: @image-url("../../images/delete-light.svg");
+                    tip-pos: "left";
+                    tip-text: Store.translator.tip-delete;
+                    clicked => {
+                        Store.ok-cancel-dialog-setting.title-type = "warning";
+                        Store.ok-cancel-dialog-setting.title-text = Store.translator.warning;
+                        Store.ok-cancel-dialog-setting.body-text = Store.translator.delete-or-not;
+                        Store.ok-cancel-dialog-setting.handle-type = "chat-item";
+                        Store.ok-cancel-dialog-setting.handle-uuid = root.uuid;
+                    }
+                }
+            }
+        }
+    }
+
+    Rectangle {
+        background: Theme.base-fill-color.brighter(2%);
+        border-radius: Theme.border-radius;
+
+        VerticalLayout{
+            padding: Theme.padding * 2;
+            TextItem {
+                text: root.text;
+            }
+        }
+    }
+}
+

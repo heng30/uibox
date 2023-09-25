@@ -7,6 +7,8 @@ pub struct Config {
     pub config_path: String,
 
     pub ui: UI,
+
+    pub socks5: Socks5,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
@@ -25,3 +27,21 @@ impl Default for UI {
         }
     }
 }
+
+#[derive(Serialize, Deserialize, Debug, Clone)]
+pub struct Socks5 {
+    pub openai: bool,
+    pub url: String,
+    pub port: u16,
+}
+
+impl Default for Socks5 {
+    fn default() -> Self {
+        Self {
+            openai: false,
+            url: "127.0.0.1".to_string(),
+            port: 1080,
+        }
+    }
+}
+

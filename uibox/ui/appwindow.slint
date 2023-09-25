@@ -1,13 +1,14 @@
 import { Theme } from "./theme.slint";
 import { Logic } from "./logic.slint";
 import { Util } from "./util.slint";
-import { Store, ColorItem, FontItem, ColorPickerConfig, ColorMakerConfig } from "./store.slint";
+import { Store, ColorItem, FontItem, ColorPickerConfig, ColorMakerConfig, ChatItem } from "./store.slint";
 import { Side } from "./side/panel.slint";
 import { Body } from "./body/panel.slint";
 import { Message } from "./base/message.slint";
 import { About } from "./dialog/about.slint";
 import { Help } from "./dialog/help.slint";
 import { Setting } from "./dialog/setting/dialog.slint";
+import { OkCancelDialog } from "./dialog/ok-cancel.slint";
 
 export component AppWindow inherits Window {
     width: Theme.default-width;
@@ -18,6 +19,10 @@ export component AppWindow inherits Window {
     forward-focus: fscope;
     no-frame: true;
     title: "uibox";
+
+    init => {
+        body.focus();
+    }
 
     fscope := FocusScope {
         property <bool> is-ctrl-pressed: false;
@@ -64,8 +69,6 @@ export component AppWindow inherits Window {
                     Store.about-dialog.show = false;
                 } else if (help-dialog.visible) {
                     Store.help-dialog.show = false;
-                } else if (setting-dialog.visible) {
-                    Store.setting-dialog.show = false;
                 }
             }
 
@@ -75,6 +78,7 @@ export component AppWindow inherits Window {
                 TouchArea { }
             }
 
+            oc-dialog := OkCancelDialog { }
             about-dialog := About { }
             help-dialog :=  Help { }
             setting-dialog :=  Setting { }
@@ -92,4 +96,4 @@ export component AppWindow inherits Window {
     }
 }
 
-export { Util, Logic, Store, ColorItem, FontItem, ColorPickerConfig, ColorMakerConfig }
+export { Util, Logic, Store, ColorItem, FontItem, ColorPickerConfig, ColorMakerConfig, ChatItem }

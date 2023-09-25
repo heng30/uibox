@@ -29,6 +29,15 @@ pub fn init(ui: &AppWindow) {
 
         config.ui.language = setting_config.ui.language.to_string();
 
+        config.socks5.openai = setting_config.proxy.openai;
+        config.socks5.url = setting_config.proxy.url.to_string();
+        config.socks5.port = setting_config
+            .proxy
+            .port
+            .to_string()
+            .parse()
+            .unwrap_or(1080);
+
         match config::save(config) {
             Err(e) => {
                 ui.global::<Logic>().invoke_show_message(
@@ -48,11 +57,16 @@ pub fn init(ui: &AppWindow) {
 fn init_setting_dialog(ui: Weak<AppWindow>) {
     let ui = ui.unwrap();
     let ui_config = config::ui();
+    let socks5_config = config::socks5();
 
     let mut setting_dialog = ui.global::<Store>().get_setting_dialog();
     setting_dialog.ui.font_size = slint::format!("{}", ui_config.font_size);
     setting_dialog.ui.font_family = ui_config.font_family.into();
     setting_dialog.ui.language = ui_config.language.into();
+
+    setting_dialog.proxy.openai = socks5_config.openai;
+    setting_dialog.proxy.url = socks5_config.url.into();
+    setting_dialog.proxy.port = slint::format!("{}", socks5_config.port);
 
     ui.global::<Store>()
         .set_setting_dialog(setting_dialog);

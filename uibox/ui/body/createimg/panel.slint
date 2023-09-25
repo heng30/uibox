@@ -1,0 +1,49 @@
+import { ListView } from "std-widgets.slint";
+import { Theme } from "../../theme.slint";
+import { Store } from "../../store.slint";
+import { Logic } from "../../logic.slint";
+import { IconBtn } from "../../base/icon-btn.slint";
+import { TabBtn } from "../../base/tab-btn.slint";
+import { Divider } from "../../base/divider.slint";
+import { NoDataImg } from "../../base/no-data.slint";
+import { UItem } from "./uitem.slint";
+import { BItem } from "./bitem.slint";
+import { Question } from "./question.slint";
+
+export component CreateImg inherits Rectangle {
+    forward-focus: question-box;
+
+    NoDataImg {
+        visible: Store.chat-datas.length <= 0;
+        img-width: root.width * 0.5;
+        text: Store.translator.no-data;
+    }
+
+    VerticalLayout {
+        lv := ListView {
+            visible: Store.chat-datas.length > 0;
+            for data[index] in Store.chat-datas : VerticalLayout {
+                padding-bottom: Theme.padding * 4;
+                spacing: Theme.spacing * 2;
+
+                uitem := UItem {
+                    uuid: data.uuid;
+                    text: data.utext;
+                }
+
+                for item[index] in data.imgs : BItem {
+                    uuid: data.uuid;
+                    img: item;
+                    index: index;
+                }
+            }
+        }
+
+        VerticalLayout {
+            padding-left: root.width * 0.1;
+            padding-right: root.width * 0.1;
+            padding-bottom: Theme.padding;
+            question-box := Question { }
+        }
+    }
+}

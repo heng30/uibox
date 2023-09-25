@@ -8,3 +8,5 @@ pub mod setting;
 pub mod fonts;
 pub mod picker;
 pub mod maker;
+pub mod chat;
+pub mod ok_cancel_dialog;

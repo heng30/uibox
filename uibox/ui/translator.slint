@@ -2,14 +2,26 @@ export struct Translation {
     cancel: string,
     ok: string,
 
+    warning: string,
     setting: string,
     help: string,
     about: string,
+
+    delete-or-not: string,
+    enter-to-send: string,
 
     setting-dialog-ui: string,
     setting-dialog-ui-font-size: string,
     setting-dialog-ui-font-family: string,
     setting-dialog-ui-language: string,
+
+    setting-dialog-proxy: string,
+    setting-dialog-proxy-openai-disabled: string,
+    setting-dialog-proxy-openai-enabled: string,
+    setting-dialog-proxy-url: string,
+    setting-dialog-proxy-url-placeholder: string,
+    setting-dialog-proxy-port: string,
+    setting-dialog-proxy-port-placeholder: string,
 
     no-data: string,
     search-placeholder: string,
@@ -22,7 +34,10 @@ export struct Translation {
     alpha: string,
     hex: string,
 
+    tip-delete: string,
     tip-copy: string,
+    tip-save: string,
+    tip-createimg: string,
     tip-colorpalette: string,
     tip-colormaker: string,
     tip-colorpicker: string,
@@ -44,14 +59,26 @@ export global Translator {
             cancel: is-cn ? "取消" : "Cancel",
             ok: is-cn ? "确定" : "Confirm",
 
+            warning: is-cn ? "警  告" : "Warning",
             setting: is-cn ? "设  置" : "Setting",
             help: is-cn ? "帮  助" : "Help",
             about: is-cn ? "关  于" : "About",
+
+            delete-or-not: is-cn ? "是否删除?" : "Delete or not?",
+            enter-to-send: is-cn ? "按回车发送" : "Enter to send",
 
             setting-dialog-ui: is-cn ? "界面" : "UI",
             setting-dialog-ui-font-size: is-cn ? "字体大小:" : "Font Size:",
             setting-dialog-ui-font-family: is-cn ? "字体样式:" : "Font Family:",
             setting-dialog-ui-language: is-cn ? "选择语言:" : "Language:",
+
+
+            setting-dialog-proxy: is-cn ? "代理": "Proxy",
+            setting-dialog-proxy-openai-disabled: is-cn ? "OpenAI未启用代理" : "Disabled OpenAI Proxy",
+            setting-dialog-proxy-openai-enabled: is-cn ? "OpenAI已启用代理" : "Enabled OpenAI Proxy",
+            setting-dialog-proxy-url-placeholder: is-cn ? "请输入URL/IP:" : "URL/IP",
+            setting-dialog-proxy-port: is-cn ? "端口:" : "Port:",
+            setting-dialog-proxy-port-placeholder: is-cn ? "请输入端口" : "Port",
 
             no-data: is-cn ? "没有数据" : "No Data",
             search-placeholder: is-cn ? "请输入关键字" : "Input Keywords",
@@ -64,7 +91,10 @@ export global Translator {
             alpha: is-cn ? "透明度:" : "Alpha:",
             hex: is-cn ? "颜色值:" : "Color:",
 
+            tip-delete: is-cn ? "删除" : "Delete",
             tip-copy: is-cn ? "复制" : "Copy",
+            tip-save: is-cn ? "保存" : "Save",
+            tip-createimg: is-cn ? "创建图片" : "Create Image",
             tip-colorpalette: is-cn ? "颜色板" : "Color Palette",
             tip-colormaker: is-cn ? "调色板" : "Color Maker",
             tip-colorpicker: is-cn ? "取色器" : "Color Picker",

@@ -20,6 +20,10 @@ pub fn ui() -> data::UI {
     CONFIG.lock().unwrap().borrow().ui.clone()
 }
 
+pub fn socks5() -> data::Socks5 {
+    CONFIG.lock().unwrap().borrow().socks5.clone()
+}
+
 pub fn config() -> data::Config {
     CONFIG.lock().unwrap().borrow().clone()
 }
@@ -66,6 +70,7 @@ impl Config {
             Ok(text) => match serde_json::from_str::<Config>(&text) {
                 Ok(c) => {
                     self.ui = c.ui;
+                    self.socks5 = c.socks5;
                     Ok(())
                 }
                 Err(e) => Err(anyhow::anyhow!("{}", e.to_string()).into()),

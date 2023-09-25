@@ -2,6 +2,7 @@ import { SettingDialogConfig } from "./store.slint";
 import { ColorPickerConfig, ColorMakerConfig } from "./store.slint";
 
 export global Logic {
+    callback handle-ok-cancel-dialog(string, string);
     callback copy-to-clipboard(string);
     callback show-message(string, string);
 
@@ -16,6 +17,10 @@ export global Logic {
     }
 
     callback image-point-color(float, float) -> ColorPickerConfig;
+
+    callback delete-chat-item(string);
+    callback send-question-text(string);
+    callback save-chat-image(string, int);
 
     pure callback current-display-color(float, float, color) -> ColorMakerConfig;
     pure callback current-color-band-color(float, float) -> color;
