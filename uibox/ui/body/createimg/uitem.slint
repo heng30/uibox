@@ -44,6 +44,18 @@ export component UItem inherits VerticalLayout{
             VerticalLayout {
                 alignment: center;
                 IconBtn {
+                    icon: @image-url("../../images/copy.svg");
+                    tip-pos: "left";
+                    tip-text: Store.translator.tip-copy;
+                    clicked => {
+                        Logic.copy-to-clipboard(root.text);
+                    }
+                }
+            }
+
+            VerticalLayout {
+                alignment: center;
+                IconBtn {
                     icon: @image-url("../../images/delete-light.svg");
                     tip-pos: "left";
                     tip-text: Store.translator.tip-delete;

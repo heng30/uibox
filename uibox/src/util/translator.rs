@@ -15,16 +15,17 @@ pub fn tr(text: &str) -> String {
     items.insert("复制失败", "Copy Failed");
     items.insert("复制成功", "Copy Success");
     items.insert("保存到数据库失败", "Save to Database Failed");
-
     items.insert("重置成功", "Reset Success");
     items.insert("保存失败", "Save Failed");
     items.insert("保存成功", "Save Success");
     items.insert("隐藏程序失败", "Hide Window Failed");
     items.insert("清除缓存失败", "Clean Cache Failed");
     items.insert("清除缓存成功", "Clean Cache Success");
-    items.insert("正在重试...", "retrying...");
-    items.insert("图片格式非法！", "Invalid Image Format!");
-    items.insert("打开文件失败！", "Open File Failed!");
+    items.insert("正在重试...", "Retrying...");
+    items.insert("正在下载...", "Download...");
+    items.insert("图片格式非法", "Invalid Image Format");
+    items.insert("打开文件失败", "Open File Failed");
+    items.insert("下载成功", "Download Success");
 
     if let Some(txt) = items.get(text) {
         return txt.to_string();

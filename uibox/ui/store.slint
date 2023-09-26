@@ -87,23 +87,23 @@ export struct ChatItem {
     uuid: string,
     utext: string,
     imgs: [image],
-    imgs-base64: [string],
+    imgs-path: [string],
 }
 
 export global Store  {
     in-out property<[ChatItem]> chat-datas: [
-        {
-            uuid: "ff",
-            utext: "hello world",
-            imgs: [
-                @image-url("./images/robot.svg"),
-                @image-url("./images/bot.svg"),
-            ],
-            imgs-base64: [
-                "111111",
-                "222222",
-            ]
-        }
+        // {
+        //     uuid: "ff",
+        //     utext: "hello world",
+        //     imgs: [
+        //         @image-url("./images/robot.svg"),
+        //         @image-url("./images/bot.svg"),
+        //     ],
+        //     imgs-path: [
+        //         "/home/blue/tmp/1.png",
+        //         "/home/blue/tmp/1.svg",
+        //     ]
+        // }
     ];
 
     in-out property<OkCancelDialogSetting> ok-cancel-dialog-setting;

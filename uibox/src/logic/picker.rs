@@ -26,7 +26,7 @@ pub fn init(ui: &AppWindow) {
             },
             Err(e) => {
                 ui.global::<Logic>().invoke_show_message(
-                    slint::format!("{}{:?}", tr("打开文件失败！"), e),
+                    slint::format!("{}. {:?}", tr("打开文件失败"), e),
                     "warning".into(),
                 );
 
@@ -37,7 +37,7 @@ pub fn init(ui: &AppWindow) {
         match image::open(image_path) {
             Err(e) => {
                 ui.global::<Logic>().invoke_show_message(
-                    slint::format!("{}{:?}", tr("打开文件失败！"), e),
+                    slint::format!("{}. {:?}", tr("打开文件失败"), e),
                     "warning".into(),
                 );
                 slint::Image::default()
@@ -58,7 +58,7 @@ pub fn init(ui: &AppWindow) {
                 }
                 _ => {
                     ui.global::<Logic>()
-                        .invoke_show_message(tr("图片格式非法！").into(), "warning".into());
+                        .invoke_show_message(tr("图片格式非法").into(), "warning".into());
                     slint::Image::default()
                 }
             },
