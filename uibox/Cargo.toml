@@ -1,6 +1,6 @@
 [package]
 name = "uibox"
-version = "0.3.0"
+version = "0.4.0"
 authors = ["heng30.xyz"]
 edition = "2021"
 build = "build.rs"
