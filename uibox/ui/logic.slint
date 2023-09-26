@@ -21,6 +21,7 @@ export global Logic {
     callback delete-chat-item(string);
     callback send-question-text(string);
     callback save-chat-image(string, int);
+    callback clean-image-cache();
 
     pure callback current-display-color(float, float, color) -> ColorMakerConfig;
     pure callback current-color-band-color(float, float) -> color;

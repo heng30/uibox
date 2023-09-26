@@ -9,12 +9,18 @@ export component BItem inherits VerticalLayout{
     in-out property<int> index;
     in-out property<image> img;
 
+    property<bool> is-max: false;
+
     padding-left: Theme.scroll-width;
     spacing: Theme.spacing;
 
     HorizontalLayout {
         padding-bottom: Theme.padding;
         alignment: space-between;
+
+        Avatar {
+            icon-source: @image-url("../../images/bot.svg");
+        }
 
         HorizontalLayout {
             padding-left: Theme.padding;
@@ -23,7 +29,21 @@ export component BItem inherits VerticalLayout{
             VerticalLayout {
                 alignment: center;
                 IconBtn {
+                    icon: root.is-max ? @image-url("../../images/min.svg") : @image-url("../../images/max.svg");
+                    tip-pos: "left";
+                    tip-text: root.is-max ? Store.translator.tip-min : Store.translator.tip-max;
+                    icon-width: root.is-max ? Theme.icon-size * 0.65 : Theme.icon-size * 0.7;
+                    clicked => {
+                        root.is-max = !root.is-max;
+                    }
+                }
+            }
+
+            VerticalLayout {
+                alignment: center;
+                IconBtn {
                     icon: @image-url("../../images/save-light.svg");
+                    tip-pos: "left";
                     tip-text: Store.translator.tip-save;
                     clicked => {
                         Logic.save-chat-image(root.uuid, root.index);
@@ -31,16 +51,13 @@ export component BItem inherits VerticalLayout{
                 }
             }
         }
-
-        Avatar {
-            icon-source: @image-url("../../images/bot.svg");
-        }
     }
 
     VerticalLayout {
         spacing: Theme.spacing * 4;
 
         Rectangle {
+            width: root.is-max ? parent.width : parent.width * 0.5;
             background: Theme.dark-fill-color;
             border-radius: Theme.border-radius;
 

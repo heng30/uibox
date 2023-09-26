@@ -6,8 +6,14 @@ pub struct Config {
     #[serde(skip)]
     pub config_path: String,
 
-    pub ui: UI,
+    #[serde(skip)]
+    pub cache_dir: String,
 
+    #[serde(skip)]
+    pub cache_image_dir: String,
+
+    pub ui: UI,
+    pub chat: Chat,
     pub socks5: Socks5,
 }
 
@@ -29,6 +35,25 @@ impl Default for UI {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
+pub struct Chat {
+    pub api_key: String,
+    pub api_base: String,
+    pub image_size: String,
+    pub image_count: String,
+}
+
+impl Default for Chat {
+    fn default() -> Self {
+        Self {
+            api_key: "".to_string(),
+            api_base: "https://api.openai.com/v1".to_string(),
+            image_size: "512x512".to_string(),
+            image_count: "1".to_string(),
+        }
+    }
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Socks5 {
     pub openai: bool,
     pub url: String,
@@ -44,4 +69,3 @@ impl Default for Socks5 {
         }
     }
 }
-

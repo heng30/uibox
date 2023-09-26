@@ -28,6 +28,15 @@ export struct SettingUI {
     language: string,
 }
 
+export struct SettingChat {
+    api-key: string,
+    api-base: string,
+    image-size: string,
+    image-count: string,
+
+    cache-size: string,
+}
+
 export struct SettingProxy {
     openai: bool,
     azure: bool,
@@ -38,6 +47,7 @@ export struct SettingProxy {
 export struct SettingDialogConfig {
     show: bool,
     ui: SettingUI,
+    chat: SettingChat,
     proxy: SettingProxy,
 }
 

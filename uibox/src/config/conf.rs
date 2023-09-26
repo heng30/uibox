@@ -24,8 +24,16 @@ pub fn socks5() -> data::Socks5 {
     CONFIG.lock().unwrap().borrow().socks5.clone()
 }
 
+pub fn chat() -> data::Chat {
+    CONFIG.lock().unwrap().borrow().chat.clone()
+}
+
 pub fn config() -> data::Config {
     CONFIG.lock().unwrap().borrow().clone()
+}
+
+pub fn cache_image_dir() -> String {
+    CONFIG.lock().unwrap().borrow().cache_image_dir.clone()
 }
 
 pub fn save(conf: data::Config) -> CResult {
@@ -40,6 +48,7 @@ impl Config {
         let app_dirs = AppDirs::new(Some("uibox"), true).unwrap();
         Self::init_app_dir(&app_dirs)?;
         self.init_config(&app_dirs)?;
+        self.init_path()?;
         self.load()?;
         debug!("{:?}", self);
         Ok(())
@@ -51,6 +60,12 @@ impl Config {
         Ok(())
     }
 
+    fn init_path(&self) -> CResult {
+        fs::create_dir_all(&self.cache_dir)?;
+        fs::create_dir_all(&self.cache_image_dir)?;
+        Ok(())
+    }
+
     fn init_config(&mut self, app_dirs: &AppDirs) -> CResult {
         self.config_path = app_dirs
             .config_dir
@@ -58,6 +73,15 @@ impl Config {
             .to_str()
             .unwrap()
             .to_string();
+
+        self.cache_dir = app_dirs
+            .data_dir
+            .join("cache")
+            .to_str()
+            .unwrap()
+            .to_string();
+
+        self.cache_image_dir = self.cache_dir.clone() + "/image";
 
         let mut dir = env::current_exe()?;
         dir.pop();
@@ -70,6 +94,7 @@ impl Config {
             Ok(text) => match serde_json::from_str::<Config>(&text) {
                 Ok(c) => {
                     self.ui = c.ui;
+                    self.chat = c.chat;
                     self.socks5 = c.socks5;
                     Ok(())
                 }

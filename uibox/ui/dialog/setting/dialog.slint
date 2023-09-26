@@ -7,6 +7,7 @@ import { TabBtn } from "../../base/tab-btn.slint";
 import { CDialog } from "../../base/cdialog.slint";
 import { UI } from "./ui.slint";
 import { Proxy } from "./proxy.slint";
+import { ImageGen } from "./image-gen.slint";
 
 export component Setting inherits CDialog {
     property<string> current-checked-item: "ui";
@@ -39,6 +40,15 @@ export component Setting inherits CDialog {
                 }
 
                 TabBtn {
+                    text: Store.translator.setting-dialog-image-gen;
+                    icon: @image-url("../../images/chat.svg");
+                    checked: current-checked-item == "image-gen";
+                    clicked => {
+                        current-checked-item = "image-gen";
+                    }
+                }
+
+                TabBtn {
                     text: Store.translator.setting-dialog-proxy;
                     icon: @image-url("../../images/proxyg.svg");
                     checked: current-checked-item == "proxy";
@@ -62,6 +72,14 @@ export component Setting inherits CDialog {
                     font-family: Store.setting-dialog.ui.font-family;
                 }
 
+                image-gen-tab := ImageGen {
+                    visible: current-checked-item == "image-gen";
+                    api-key: Store.setting-dialog.chat.api-key;
+                    api-base: Store.setting-dialog.chat.api-base;
+                    image-count: Store.setting-dialog.chat.image-count;
+                    image-size: Store.setting-dialog.chat.image-size;
+                }
+
                 proxy-tab := Proxy {
                     visible: current-checked-item == "proxy";
                     proxy-openai: Store.setting-dialog.proxy.openai;
@@ -80,6 +98,11 @@ export component Setting inherits CDialog {
         ui-tab.font-family = Store.setting-dialog.ui.font-family;
         ui-tab.set-language(Store.setting-dialog.ui.language);
 
+        image-gen-tab.api-key = Store.setting-dialog.chat.api-key;
+        image-gen-tab.api-base = Store.setting-dialog.chat.api-base;
+        image-gen-tab.image-count = Store.setting-dialog.chat.image-count;
+        image-gen-tab.image-size = Store.setting-dialog.chat.image-size;
+
         proxy-tab.proxy-openai = Store.setting-dialog.proxy.openai;
         proxy-tab.proxy-url = Store.setting-dialog.proxy.url;
         proxy-tab.proxy-port = Store.setting-dialog.proxy.port;
@@ -94,6 +117,12 @@ export component Setting inherits CDialog {
                 font-size: ui-tab.font-size,
                 font-family: ui-tab.font-family,
                 language: ui-tab.language
+            },
+            chat: {
+                api-key: image-gen-tab.api-key,
+                api-base: image-gen-tab.api-base,
+                image-count: image-gen-tab.image-count,
+                image-size: image-gen-tab.image-size
             },
             proxy: {
                 openai: proxy-tab.proxy-openai,
