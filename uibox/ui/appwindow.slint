@@ -20,6 +20,10 @@ export component AppWindow inherits Window {
     no-frame: true;
     title: "uibox";
 
+    public function chat-scroll-to-bottom() {
+        body.scroll-to-bottom();
+    }
+
     init => {
         body.focus();
     }

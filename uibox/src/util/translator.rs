@@ -22,10 +22,11 @@ pub fn tr(text: &str) -> String {
     items.insert("清除缓存失败", "Clean Cache Failed");
     items.insert("清除缓存成功", "Clean Cache Success");
     items.insert("正在重试...", "Retrying...");
-    items.insert("正在下载...", "Download...");
+    items.insert("正在生成...", "Generating...");
+    items.insert("生成成功", "Generate Success");
+    items.insert("生成失败", "Generate Failed");
     items.insert("图片格式非法", "Invalid Image Format");
     items.insert("打开文件失败", "Open File Failed");
-    items.insert("下载成功", "Download Success");
 
     if let Some(txt) = items.get(text) {
         return txt.to_string();

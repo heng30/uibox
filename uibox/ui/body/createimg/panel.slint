@@ -13,6 +13,14 @@ import { Question } from "./question.slint";
 export component CreateImg inherits Rectangle {
     forward-focus: question-box;
 
+    public function scroll-to-bottom() {
+        if (lv.viewport-height <= lv.visible-height) {
+            return;
+        }
+
+        lv.viewport-y = -lv.viewport-height + lv.visible-height;
+    }
+
     NoDataImg {
         visible: Store.chat-datas.length <= 0;
         img-width: root.width * 0.5;

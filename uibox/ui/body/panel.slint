@@ -9,6 +9,10 @@ import { CreateImg } from "./createimg/panel.slint";
 export component Body inherits VerticalLayout {
     forward-focus: create-img;
 
+    public function scroll-to-bottom() {
+        create-img.scroll-to-bottom();
+    }
+
     create-img := CreateImg {
         visible: Store.selected-panel == SelectPanel.createimg;
         height: self.visible ? Theme.default-height : 0px;

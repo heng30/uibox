@@ -162,19 +162,31 @@ export global Store  {
     in-out property<{show: bool, text-cn: string, text-en: string}> help-dialog: {
         show: false,
         text-cn:
-              "调色板:\n"
+            "图片生成:\n"
+            + "  1. 使用OpenAI的图片生成功能。\n"
+            + "  2. 图片生成需要一定的时间。\n"
+            + "\n调色板:\n"
             + "  1. 颜色格式：RGBA。\n"
             + "\n取色器:\n"
             + "  1. 颜色格式：RGBA。\n"
             + "  2. 支持图片格式：PNG。\n"
-            + "  3. 需要安装本地文件框：kdialog/zenity。\n",
+            + "  3. 需要安装本地文件框：kdialog/zenity。\n"
+            + "\n配置和数据:\n"
+            + "  1. 配置保存在~/.config/uibox/uibox.conf\n"
+            + "  2. 数据保存在~/.local/share/uibox\n",
         text-en:
-              "Color Palette:\n"
+            "Image Generation:\n"
+            + "  1. Use OpenAI's image generation function.\n"
+            + "  2. Image generation requires some time.\n"
+            + "\nColor Palette:\n"
             + "  1. Color format: RGBA.\n"
             + "\nColor Picker:\n"
             + "  1. Color format: RGBA.\n"
             + "  2. Support image format: PNG.\n"
-            + "  3. Need to install file dialog: kdialog/zenity.\n",
+            + "  3. Need to install file dialog: kdialog/zenity.\n"
+            + "\nConfiguration and Data:\n"
+            + "  1. Configuration is saved in ~/.config/uibox/uibox.conf.\n"
+            + "  2. Data is saved in ~/.local/share/uibox.\n",
     };
 }
 

@@ -7,11 +7,12 @@ use async_openai::{
     config::OpenAIConfig, types::CreateImageRequestArgs, types::ImageSize, types::ResponseFormat,
     Client,
 };
-use log::warn;
 use native_dialog::FileDialog;
+use slint::Timer;
 use slint::{ComponentHandle, Model, ModelRc, VecModel, Weak};
 use std::fs;
 use std::path::Path;
+use std::time::Duration;
 use tokio::task;
 use uuid::Uuid;
 
@@ -109,7 +110,9 @@ pub fn init(ui: &AppWindow) {
             });
 
         ui.global::<Logic>()
-            .invoke_show_message(tr("正在下载...").into(), "info".into());
+            .invoke_show_message(tr("正在生成...").into(), "info".into());
+
+        scroll_to_bottom(ui.as_weak());
 
         let ui_handle = ui.as_weak();
         let dii = DownloadImgConfig {
@@ -117,14 +120,44 @@ pub fn init(ui: &AppWindow) {
             question: question.to_string(),
         };
         task::spawn(async move {
+            let ui = ui_handle.clone();
             match download_images(ui_handle, dii).await {
                 Err(e) => {
-                    warn!("{:?}", e);
+                    let estr = e.to_string();
+                    let _ = slint::invoke_from_event_loop(move || {
+                        ui.unwrap().global::<Logic>().invoke_show_message(
+                            slint::format!("{}. {}: {}", tr("生成失败"), tr("原因"), estr),
+                            "warning".into(),
+                        );
+                    });
                 }
                 _ => {}
             }
         });
     });
+
+    let ui_handle = ui.as_weak();
+    ui.global::<Logic>()
+        .on_retry_question_text(move |uuid, question| {
+            if question.is_empty() {
+                return;
+            }
+
+            let ui = ui_handle.unwrap();
+            for (index, item) in ui.global::<Store>().get_chat_datas().iter().enumerate() {
+                if item.uuid == uuid {
+                    ui.global::<Store>()
+                        .get_chat_datas()
+                        .as_any()
+                        .downcast_ref::<VecModel<ChatItem>>()
+                        .expect("We know we set a VecModel earlier")
+                        .remove(index);
+
+                    break;
+                }
+            }
+            ui.global::<Logic>().invoke_send_question_text(question);
+        });
 }
 
 // Warning: This function will run in other thread
@@ -145,8 +178,12 @@ async fn download_images(ui: Weak<AppWindow>, dii: DownloadImgConfig) -> CResult
         .with_api_key(chat_config.api_key)
         .with_api_base(chat_config.api_base);
 
-    let client =
-        Client::with_config(config).with_http_client(uhttp::client(uhttp::ClientType::OpenAI)?);
+    let http_client = uhttp::client(
+        uhttp::ClientType::OpenAI,
+        u64::max(chat_config.request_timeout, 10),
+    )?;
+
+    let client = Client::with_config(config).with_http_client(http_client);
 
     let request = CreateImageRequestArgs::default()
         .prompt(dii.question)
@@ -192,12 +229,20 @@ async fn download_images(ui: Weak<AppWindow>, dii: DownloadImgConfig) -> CResult
                     .set_row_data(index, item);
 
                 ui.global::<Logic>()
-                    .invoke_show_message(tr("下载成功").into(), "success".into());
-
+                    .invoke_show_message(tr("生成成功").into(), "success".into());
                 return;
             }
         }
     });
 
     Ok(())
+}
+
+fn scroll_to_bottom(ui: Weak<AppWindow>) {
+    for i in 1..=2 {
+        let ui = ui.clone();
+        Timer::single_shot(Duration::from_millis(i * 100), move || {
+            ui.unwrap().invoke_chat_scroll_to_bottom()
+        });
+    }
 }

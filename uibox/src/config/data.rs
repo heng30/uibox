@@ -40,6 +40,7 @@ pub struct Chat {
     pub api_base: String,
     pub image_size: String,
     pub image_count: String,
+    pub request_timeout: u64,
 }
 
 impl Default for Chat {
@@ -49,6 +50,7 @@ impl Default for Chat {
             api_base: "https://api.openai.com/v1".to_string(),
             image_size: "512x512".to_string(),
             image_count: "1".to_string(),
+            request_timeout: 60,
         }
     }
 }

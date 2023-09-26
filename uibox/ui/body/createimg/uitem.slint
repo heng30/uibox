@@ -44,6 +44,19 @@ export component UItem inherits VerticalLayout{
             VerticalLayout {
                 alignment: center;
                 IconBtn {
+                    icon: @image-url("../../images/reset.svg");
+                    tip-pos: "left";
+                    tip-text: Store.translator.tip-retry;
+                    icon-width: Theme.icon-size * 0.6;
+                    clicked => {
+                        Logic.retry-question-text(root.uuid, root.text);
+                    }
+                }
+            }
+
+            VerticalLayout {
+                alignment: center;
+                IconBtn {
                     icon: @image-url("../../images/copy.svg");
                     tip-pos: "left";
                     tip-text: Store.translator.tip-copy;
