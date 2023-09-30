@@ -17,7 +17,7 @@ export component TabBtn inherits Rectangle {
         VerticalLayout {
             alignment: center;
             img := Image {
-                height: Theme.enlarge-font-size;
+                height: Theme.icon-size;
                 width: self.height;
                 colorize: root.checked ? text-checked-color : touch.has-hover ? text-hover-color : text-color;
 
@@ -28,16 +28,14 @@ export component TabBtn inherits Rectangle {
             }
         }
 
-        VerticalLayout {
-            alignment: center;
-            txt := Text {
-                color: root.checked ? text-checked-color : touch.has-hover ? text-hover-color : text-color;
-                font-size: Theme.default-font-size;
+        txt := Text {
+            vertical-alignment: center;
+            color: root.checked ? text-checked-color : touch.has-hover ? text-hover-color : text-color;
+            font-size: Theme.default-font-size;
 
-                animate color {
-                    duration: Theme.default-animate-duration;
-                    easing: ease-in-out;
-                }
+            animate color {
+                duration: Theme.default-animate-duration;
+                easing: ease-in-out;
             }
         }
     }
