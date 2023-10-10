@@ -23,14 +23,14 @@ export component UI inherits Rectangle {
         alignment: start;
 
         HorizontalLayout {
-            height: Store.setting-dialog.ui.language == "cn" ? font-size-txt.preferred-height : font-size-txt.preferred-height * 1.33;
-            font-size-txt := Label {
+            height: Math.max(font-size-label.preferred-height, font-size-spin-box.preferred-height);
+            font-size-label := Label {
                 width: Theme.default-label-width;
                 text: Store.translator.setting-dialog-ui-font-size;
             }
 
             font-size-spin-box := SpinBox {
-                minimum: 15;
+                minimum: 10;
                 maximum: 50;
             }
         }
@@ -47,6 +47,7 @@ export component UI inherits Rectangle {
                 current-index: 0;
             }
         }
+
 
         HorizontalLayout {
             Label {
@@ -82,5 +83,6 @@ export component UI inherits Rectangle {
                 }
             }
         }
+
     }
 }

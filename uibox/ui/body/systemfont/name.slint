@@ -4,6 +4,7 @@ import { Store } from "../../store.slint";
 import { Logic } from "../../logic.slint";
 import { IconBtn } from "../../base/icon-btn.slint";
 import { NoDataImg } from "../../base/no-data.slint";
+import { Divider } from "../../base/divider.slint";
 
 export component Name inherits Rectangle {
     in-out property search-text <=> search-lineedit.text;
@@ -31,7 +32,7 @@ export component Name inherits Rectangle {
     }
 
     VerticalLayout {
-        HorizontalLayout {
+        search-layout := HorizontalLayout {
             search-lineedit := LineEdit {
                 width: root.width - search-btn.width;
                 placeholder-text: Store.translator.search-placeholder;
@@ -61,30 +62,38 @@ export component Name inherits Rectangle {
             }
         }
 
-        flick := ScrollView {
-            viewport-height: Store.fonts.length * root.item-height;
-            for data[index] in Store.fonts : Rectangle {
-                y: index * item-height;
-                height: root.item-height;
-                background: root.font-name == data.postscript-name || touch.pressed ? root.background.darker(15%) : touch.has-hover ? root.background.darker(5%) : Colors.transparent;
+        HorizontalLayout {
+            Divider {
+                width: 1px;
+                height: Theme.default-height - search-layout.preferred-height;
+                background: Theme.lighter-border-color;
+            }
 
-                touch := TouchArea {
-                    mouse-cursor: self.has-hover ? pointer : default;
-                    clicked => {
-                        root.font-name = data.postscript-name;
-                        root.font-family = data.family;
-                        root.selected(data.postscript-name);
+            flick := ScrollView {
+                viewport-height: Store.fonts.length * root.item-height;
+                for data[index] in Store.fonts : Rectangle {
+                    y: index * item-height;
+                    height: root.item-height;
+                    background: root.font-name == data.postscript-name || touch.pressed ? root.background.darker(15%) : touch.has-hover ? root.background.darker(5%) : Colors.transparent;
+
+                    touch := TouchArea {
+                        mouse-cursor: self.has-hover ? pointer : default;
+                        clicked => {
+                            root.font-name = data.postscript-name;
+                            root.font-family = data.family;
+                            root.selected(data.postscript-name);
+                        }
                     }
-                }
 
-                HorizontalLayout {
-                    padding-left: Theme.padding * 2;
+                    HorizontalLayout {
+                        padding-left: Theme.padding * 2;
 
-                    Text {
-                        color: Theme.secondary-text-color;
-                        text: data.postscript-name;
-                        overflow: elide;
-                        vertical-alignment: center;
+                        Text {
+                            color: Theme.secondary-text-color;
+                            text: data.postscript-name;
+                            overflow: elide;
+                            vertical-alignment: center;
+                        }
                     }
                 }
             }

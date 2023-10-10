@@ -2,6 +2,13 @@ use cmd_lib::run_fun;
 
 fn main() {
     slint_build::compile("ui/appwindow.slint").unwrap();
+
+    #[cfg(target_os = "windows")]
+    {
+        link_win_lib();
+        set_win_info();
+    }
+
     let _ = write_app_version();
 }
 
@@ -18,3 +25,14 @@ fn write_app_version() -> Result<(), Box<dyn std::error::Error>> {
 
     Ok(())
 }
+
+#[allow(dead_code)]
+fn link_win_lib() {
+    println!("cargo:rustc-link-search=win/lib");
+}
+
+#[cfg(target_os = "windows")]
+fn set_win_info() {
+    embed_resource::compile("../win/icon.rc", embed_resource::NONE);
+}
+

@@ -13,6 +13,18 @@ export component Proxy inherits Rectangle {
         alignment: start;
 
         HorizontalLayout {
+            type-txt := Label {
+                width: Theme.default-label-width;
+                text: Store.translator.setting-dialog-proxy-type;
+            }
+
+            ComboBox {
+                model: ["Socks5"];
+                current-value: self.model[0];
+            }
+        }
+
+        HorizontalLayout {
             url-txt := Label {
                 width: Theme.default-label-width;
                 text: "URL/IP:";
